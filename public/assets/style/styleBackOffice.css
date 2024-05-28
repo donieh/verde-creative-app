@@ -1,0 +1,38 @@
+:root {
+    --lime: #e8e8cc;
+    --green: #15452f;
+    --grey1: #F5F5F5;
+    --grey2: #DCDCDC;
+  }
+  
+  .plus-jakarta sans-jakarta {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .rock-salt-regular {
+    font-family: "Rock Salt", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: sans-serif;
+    background-color: white;
+    color: var(--green);
+  }

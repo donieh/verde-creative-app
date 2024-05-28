@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index'); // Menampilkan file index.blade.php
+});
+
+Route::get('/about', function () {
+    return view('about'); // Menampilkan file about.blade.php
 });
