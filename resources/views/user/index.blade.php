@@ -9,15 +9,14 @@ $user = new User($conn);
 $action = isset($_GET['action']) ? $_GET['action'] : "";
 
 try {
-    if ($action == "add") {
-        include "add/index.php";
-    } else if ($action == "edit") {
-        include "edit/index.php";
-    } else if ($action == "delete") {
-        include "delete/index.php";
-    } else {
-        // Display the user management interface
-        ?>
+  if ($action == "add") {
+    include "add/index.blade.php";
+} else if ($action == "edit") {
+    include "edit/index.blade.php";
+} else if ($action == "delete") {
+    include "delete/index.blade.php";
+} else {
+?>
 
         <div class="container-fluid">
             <!-- Page Heading -->

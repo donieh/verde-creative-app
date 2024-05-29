@@ -6,11 +6,11 @@ $client = new Client($conn);
 
 $action = isset($_GET['action']) ? $_GET['action'] : "";
 if ($action == "add") {
-    include "add/index.php";
+    include "add/index.blade.php";
 } else if ($action == "edit") {
-    include "edit/index.php";
+    include "edit/index.blade.php";
 } else if ($action == "delete") {
-    include "delete/index.php";
+    include "delete/index.blade.php";
 } else {
 ?>
 

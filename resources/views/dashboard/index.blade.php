@@ -64,15 +64,15 @@ include("../../php/config.php");
                 if ($menu == "") {
                     include "dashboard.php";
                 } else if ($menu == "client") {
-                    include "../client/index.php";
+                    include "../client/index.blade.php";
                 } else if ($menu == "user") {
-                    include "../user/index.php";
+                    include "../user/index.blade.php";
                 } else if ($menu == "product") {
-                    include "../product/index.php";
+                    include "../product/index.blade.php";
                 } else if ($menu == "transaction") {
-                    include "../transaction/index.php";
+                    include "../transaction/index.blade.php";
                 } else if ($menu == "transactionDetail") {
-                    include "../transaction/add/detail/add/index.php";
+                    include "../transaction/add/detail/add/index.blade.php";
                 } else {
                     include "blank_page.php";
                 }
