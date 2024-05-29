@@ -20,3 +20,8 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about'); // Menampilkan file about.blade.php
 });
+
+Route::get('/login', function () {
+    return view('login.index'); // Menampilkan file about.blade.php
+});
+
