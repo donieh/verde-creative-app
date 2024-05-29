@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
+
+    public $table = "invoice";
+
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+    protected $auditTimestamps = true;
+
+    public $fillable = [
+        'id',
+        'code',
+        'invoiceDate',
+        'quantity',
+        'totalPrice',
+        'subTotal',
+        'discount',
+        'downPayment',
+        'grandTotal',
+        'startDate',
+        'endDate',
+        'dueDate',
+    ];
 }
