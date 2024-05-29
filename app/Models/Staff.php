@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Staff extends Model
 {
     use HasFactory;
+
+    public $table = "staff";
+
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+    protected $auditTimestamps = true;
+
+    public $fillable = [
+        'id',
+        'name',
+        'username',
+        'password',
+    ];
 }
