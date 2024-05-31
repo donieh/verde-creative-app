@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <form action="../../auth/login/store_login.php" method="post">
+  <!-- <form action="../../auth/login/store_login.php" method="post"> -->
     <div class="container">
       <div class="form-logo">
         <a href="../index.php" class="login-title"><img src="../assets/images/verde_wide_green.png" alt="" ></a>
@@ -23,7 +23,13 @@
       <div class="box form-box">
         <!-- <span><b>Verde Creative</b></span></a><br> -->
         <!-- <header>Login</header> -->
-        <form action="">
+
+        @error('username')
+        <p>{{ $message }}</p>
+        @enderror
+
+        <form action="/login" method="post">
+          {{ csrf_field() }}
           <div class="field input">
             <label for="username"></label>
             <input type="username" name="username" id="username" autocomplete="off" placeholder="Username" required />
