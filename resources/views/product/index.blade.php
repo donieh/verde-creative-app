@@ -13,7 +13,7 @@
             </div>
 
             <div class="card-body">
-                <a href="?menu=product&action=add" class="btn" style="color: white; background: #15452f">
+                <a href="/product/create" class="btn" style="color: white; background: #15452f">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (\App\Models\Product::get() as $product)
+                            @foreach (\App\Models\Item::get() as $product)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $product->item }}</td>

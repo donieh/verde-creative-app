@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Staff;
 use Illuminate\Http\Request;
@@ -67,6 +68,9 @@ Route::get('/client', function() {
     return view('client.index');
 });
 
-Route::get('/product', function() {
-    return view('product.index');
-});
+Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product/create', [ProductController::class, 'create']);
+Route::post('/product', [ProductController::class, 'store']);
+Route::get('/product/{staffId}/edit', [ProductController::class, 'edit']);
+Route::put('/product/{staffId}', [ProductController::class, 'update']);
+Route::delete('/product/{staffId}', [ProductController::class, 'destroy']); // delete -> http method ; destroy -> controller method

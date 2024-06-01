@@ -13,9 +13,11 @@ class Item extends Model
 
     protected $fillable = [
         'id',
-        'string'
+        'name'
     ];
 
+    public $timestamps = false;
+    
     public function packages()
     {
         return $this->hasMany(Package::class);
