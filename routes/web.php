@@ -66,3 +66,7 @@ Route::delete('/user/{staffId}', [UserController::class, 'destroy']); // delete 
 Route::get('/client', function() {
     return view('client.index');
 });
+
+Route::get('/product', function() {
+    return view('product.index');
+});

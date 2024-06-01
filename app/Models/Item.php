@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    use HasFactory;    use HasFactory;
-    public $table = 'items';
+    use HasFactory;
 
-    public $fillable = [
+    protected $table = 'items';
+
+    protected $fillable = [
         'id',
         'string'
     ];
 
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }
