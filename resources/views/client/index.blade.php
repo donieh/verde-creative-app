@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 include("../../php/config.php");
 include("../models/Client.php");
@@ -14,6 +15,10 @@ if ($action == "add") {
 } else {
 ?>
 
+=======
+@extends('layout.user-panel-layout')
+@section('panel_content')
+>>>>>>> 7bbe9331de143b255147073fe3dc67f657f4c06d
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -49,34 +54,31 @@ if ($action == "add") {
                         </thead>
 
                         <tbody>
-                            <?php
-                            $result = $client->index();
-                            $no = 1;
-                            ?>
-                            <?php while ($row = $result->fetch_assoc()) : ?>
-                                <tr>
-                                    <td><?php echo $no++; ?></td>
-                                    <td><?php echo $row["code"]; ?></td>
-                                    <td><?php echo $row["name"]; ?></td>
-                                    <td><?php echo $row["contactPerson"]; ?></td>
-                                    <td><?php echo $row["phone"]; ?></td>
-                                    <td><?php echo $row["address"]; ?></td>
-                                    <td>
-                                        <a href="?menu=client&action=edit&id=<?php echo $row['id']; ?>" class="btn" style="color: white; background: #466d1d">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="?menu=client&action=delete&id=<?php echo $row['id']; ?>" class="btn" style="color: white; background: #c01605" onclick="return confirm('Do you want to delete this?')">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endwhile; ?>
+                            @foreach (\App\Models\Client::get() as $client)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $client->code}}</td>
+                                <td>{{ $client->name }}</td>
+                                <td>{{ $client->contactPerson}}</td>
+                                <td>{{ $client->phone }}</td>
+                                <td>{{ $client->address}}</td>
+                                <td>
+                                    <a href="?menu=client&action=edit&id={{ $client->id }}" class="btn"
+                                        style="color: white; background: #466d1d">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="?menu=client&action=delete&id={{ $client->id }}" class="btn"
+                                        style="color: white; background: #c01605"
+                                        onclick="return confirm('Do you want to delete this?')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                           @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-<?php
-}
-?>
+@endsection

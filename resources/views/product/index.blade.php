@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 include("../../php/config.php");
 include("../models/Product.php");
@@ -14,6 +15,10 @@ if ($action == "add") {
 } else {
 ?>
 
+=======
+@extends('layout.user-panel-layout')
+@section('panel_content')
+>>>>>>> 7bbe9331de143b255147073fe3dc67f657f4c06d
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -27,7 +32,7 @@ if ($action == "add") {
             </div>
 
             <div class="card-body">
-                <a href="?menu=product&action=add" class="btn" style="color: white; background: #15452f">
+                <a href="/product/create" class="btn" style="color: white; background: #15452f">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
@@ -46,32 +51,34 @@ if ($action == "add") {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $result = $product->index();
-                            $no = 1;
-                            ?>
-                            <?php while ($row = $result->fetch_assoc()) : ?>
+                            @foreach (\App\Models\Item::get() as $product)
                                 <tr>
-                                    <td><?php echo $no++; ?></td>
-                                    <td><?php echo $row["item"]; ?></td>
-                                    <td><?php echo $row["package"]; ?></td>
-                                    <td><?php echo $row["price"]; ?></td>
-                                                                        <td>
-                                        <a href="?menu=product&action=edit&id=<?php echo $row['id']; ?>" class="btn" style="color: white; background: #466d1d">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="?menu=product&action=delete&id=<?php echo $row['id']; ?>" class="btn" style="color: white; background: #c01605" onclick="return confirm('Do you want to delete this?')">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $product->item }}</td>
+                                    <td>{{ $product->package }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        <div style="display: flex; gap: 5px;">
+                                            <a href="/product/{{ $product->id }}/edit" class="btn"
+                                                style="color: white; background: #466d1d;">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                            <form action="/product/{{ $product->id }}" method="POST"
+                                                onsubmit="return confirm('Do you want to delete this?');">
+                                                @method('delete')
+                                                {{ csrf_field() }}
+                                                <button type="submit" style="color: white; background: #c01605;"
+                                                    class="btn"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
-                            <?php endwhile; ?>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-<?php
-}
-?>
+@endsection

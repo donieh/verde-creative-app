@@ -19,6 +19,7 @@ class Staff extends Model
     public $fillable = [
         'id',
         'name',
+        'position',
         'username',
         'password',
     ];
