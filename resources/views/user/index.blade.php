@@ -41,11 +41,6 @@
                                                 style="color: white; background: #466d1d;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            {{-- <a href="?menu=user&action=delete&id={{ $staff->id }}" class="btn"
-                                            style="color: white; background: #c01605;"
-                                            onclick="return confirm('Do you want to delete this?');">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a> --}}
 
                                             <form action="/user/{{ $staff->id }}" method="POST"
                                                 onsubmit="return confirm('Do you want to delete this?');">
