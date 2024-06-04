@@ -1,24 +1,5 @@
-<<<<<<< HEAD
-<?php
-include("../../php/config.php");
-include("../models/Client.php");
-
-$client = new Client($conn);
-
-$action = isset($_GET['action']) ? $_GET['action'] : "";
-if ($action == "add") {
-    include "add/index.blade.php";
-} else if ($action == "edit") {
-    include "edit/index.blade.php";
-} else if ($action == "delete") {
-    include "delete/index.blade.php";
-} else {
-?>
-
-=======
 @extends('layout.user-panel-layout')
 @section('panel_content')
->>>>>>> 7bbe9331de143b255147073fe3dc67f657f4c06d
     <div class="container-fluid">
 
         <!-- Page Heading -->

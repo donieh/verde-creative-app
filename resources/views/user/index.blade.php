@@ -10,23 +10,11 @@
                 <h6 class="m-0 font-weight-bold" style="color: black;">Data User</h6>
             </div>
 
-<<<<<<< HEAD
-try {
-  if ($action == "add") {
-    include "add/index.blade.php";
-} else if ($action == "edit") {
-    include "edit/index.blade.php";
-} else if ($action == "delete") {
-    include "delete/index.blade.php";
-} else {
-?>
-=======
             <div class="card-body">
                 <a href="/user/create" class="btn" style="color: white; background: #15452f;">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
->>>>>>> 7bbe9331de143b255147073fe3dc67f657f4c06d
 
             <div class="card-body">
                 <div class="table-responsive">

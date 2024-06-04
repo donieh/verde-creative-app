@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VERDE Creative</title>
-  <link rel="icon" href="{{ asset('assets/images/verde_logo_green.png') }}">
+  <link rel="icon" href="../../assets/images/verde_logo_green.png">
 
     <!-- css -->
 
   <!-- css -->
-  <link rel="stylesheet" href="{{ asset('assets/style/style.css') }}">
+  <link rel="stylesheet" href="../../assets/style/style.css">
 
   <!-- font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
