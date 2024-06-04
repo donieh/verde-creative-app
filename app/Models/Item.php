@@ -12,7 +12,7 @@ class Item extends Model
     protected $table = 'items';
 
     protected $fillable = [
-        'id',
+        // 'id',
         'name'
     ];
 
