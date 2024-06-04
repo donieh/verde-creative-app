@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{{asset('style/style_Admin.css')}}">
+  <link rel="stylesheet" href="../../assets/style/style_Admin.css" />
   <title>Login</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,9 +14,10 @@
 </head>
 
 <body>
+  <!-- <form action="../../auth/login/store_login.php" method="post"> -->
     <div class="container">
       <div class="form-logo">
-        <a href="../index.blade.php" class="login-title"><img src="../assets/images/verde_wide_green.png" alt="" ></a>
+        <a href="../index.php" class="login-title"><img src="../assets/images/verde_wide_green.png" alt="" ></a>
           
       </div>
       <div class="box form-box">
@@ -27,9 +28,9 @@
         <p>{{ $message }}</p>
         @enderror
 
-        <form action="{{route('login')}}" method="post">
-        @csrf
-        <div class="field input">
+        <form action="/login" method="post">
+          {{ csrf_field() }}
+          <div class="field input">
             <label for="username"></label>
             <input type="username" name="username" id="username" autocomplete="off" placeholder="Username" required />
           </div>

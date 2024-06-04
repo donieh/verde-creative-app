@@ -10,12 +10,12 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function index()
-    {
-        return view('index');
-    }
-    public function dashboard()
-    {
-        return view('dashboard');
-    }
+    // public function index()
+    // {
+    //     return view('index');
+    // }
+    // public function dashboard()
+    // {
+    //     return view('dashboard');
+    // }
 }
