@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientController;
 use App\Models\Staff;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -64,9 +66,12 @@ Route::delete('/user/{staffId}', [UserController::class, 'destroy']); // delete 
 
 // Route::resource('user', UserController::class);
 
-Route::get('/client', function() {
-    return view('client.index');
-});
+Route::get('/client', [ClientController::class, 'index']);
+Route::get('/client/create', [ClientController::class, 'create']);
+Route::post('/client', [ClientController::class, 'store']);
+Route::get('/client/{clientId}/edit', [ClientController::class, 'edit']);
+Route::put('/client/{clientId}', [ClientController::class, 'update']);
+Route::delete('/client/{clientId}', [ClientController::class, 'destroy']);
 
 Route::get('/product', [ProductController::class, 'index']);
 Route::get('/product/create', [ProductController::class, 'create']);

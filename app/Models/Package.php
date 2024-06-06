@@ -12,7 +12,7 @@ class Package extends Model
     protected $table = 'packages';
 
     protected $fillable = [
-        'id',
+        'itemId',
         'name',
         'price',
     ];

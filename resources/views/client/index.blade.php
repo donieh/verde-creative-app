@@ -1,4 +1,5 @@
-@extends('layout.user-panel-layout')
+@extends('layout.client-panel-layout')
+
 @section('panel_content')
     <div class="container-fluid">
 
@@ -13,7 +14,7 @@
             </div>
 
             <div class="card-body">
-                <a href="?menu=client&action=add" class="btn" style="color: white; background: #15452f">
+                <a href="/client/create" class="btn" style="color: white; background: #15452f;">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
@@ -44,18 +45,23 @@
                                 <td>{{ $client->phone }}</td>
                                 <td>{{ $client->address}}</td>
                                 <td>
-                                    <a href="?menu=client&action=edit&id={{ $client->id }}" class="btn"
-                                        style="color: white; background: #466d1d">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="?menu=client&action=delete&id={{ $client->id }}" class="btn"
-                                        style="color: white; background: #c01605"
-                                        onclick="return confirm('Do you want to delete this?')">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                           @endforeach
+                                <div style="display: flex; gap: 5px;">
+                                            <a href="/client/{{ $client->id }}/edit" class="btn"
+                                                style="color: white; background: #466d1d;">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                            <form action="/client/{{ $client->id }}" method="POST"
+                                                onsubmit="return confirm('Do you want to delete this?');">
+                                                @method('delete')
+                                                {{ csrf_field() }}
+                                                <button type="submit" style="color: white; background: #c01605;"
+                                                    class="btn"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
