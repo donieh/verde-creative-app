@@ -20,11 +20,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = Item::create([
-            'name' => $request->item,
+            'name' => $request->name,
             'package' => $request->package,
             'price' => $request->price,
            
         ]);
+
+        
 
         return redirect()->to('/product');
     }
@@ -40,7 +42,7 @@ class ProductController extends Controller
     public function update(Request $request,$itemId)
     {
         $item = Item::where('id',$itemId)->update([
-            'item' => $request->item,
+            'name' => $request->name,
             'package' => $request->package,
             'price' => $request->price,
         ]);

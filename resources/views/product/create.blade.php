@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>Nama Item</label>
-                        <input type="text" class="form-control" name="item" placeholder="Masukkan Nama Item"
+                        <input type="text" class="form-control" name="name" placeholder="Masukkan Nama Item"
                             required />
                     </div>
                     <div class="form-group">

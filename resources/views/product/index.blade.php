@@ -35,7 +35,7 @@
                             @foreach (\App\Models\Item::get() as $product)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $product->item }}</td>
+                                    <td>{{ $product->name }}</td>
                                     <td>{{ $product->package }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>

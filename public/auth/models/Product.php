@@ -29,14 +29,14 @@ class Product
     public function store($newProduct)
     {
         // Prepare and execute an INSERT query to add a new user to the staff table
-        $query = "INSERT INTO product (item, package, price) VALUES (?, ?, ?)";
+        $query = "INSERT INTO product (name, package, price) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         if (!$stmt) {
             throw new Exception("Error preparing query: " . $this->conn->error);
         }
 
-        $stmt->bind_param("sss", $newProduct['item'], $newProduct['package'], $newProduct['price']);
+        $stmt->bind_param("sss", $newProduct['name'], $newProduct['package'], $newProduct['price']);
         $success = $stmt->execute();
 
         if (!$success) {
@@ -72,14 +72,14 @@ class Product
     public function update($updatedProduct)
     {
         // Update an existing user in the product table
-        $query = "UPDATE product SET item = ?, package = ?, price = ? WHERE id = ?";
+        $query = "UPDATE product SET name = ?, package = ?, price = ? WHERE id = ?";
         $stmt = $this->conn->prepare($query);
 
         if (!$stmt) {
             throw new Exception("Error preparing query: " . $this->conn->error);
         }
 
-        $stmt->bind_param("ssssi", $updatedProduct['item'], $updatedProduct['package'], $updatedProduct['price'], $updatedProduct['id']);
+        $stmt->bind_param("ssssi", $updatedProduct['name'], $updatedProduct['package'], $updatedProduct['price'], $updatedProduct['id']);
         $success = $stmt->execute();
 
         if (!$success) {
