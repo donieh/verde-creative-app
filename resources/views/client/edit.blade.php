@@ -1,4 +1,4 @@
-@extends('layout.client-panel-layout')
+@extends('layout.user-panel-layout')
 
 @section('panel_content')
     <div class="container-fluid">
