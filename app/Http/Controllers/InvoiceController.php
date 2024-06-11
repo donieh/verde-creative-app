@@ -16,29 +16,29 @@ class InvoiceController extends Controller
     public function create()
     {
         $invoiceItems = \App\Models\InvoiceItem::all();
-        return view('invoice.create', compact('invoiceItems'));
+        return view('transaction.create', compact('invoiceItems'));
     }
 
     public function store(Request $request)
     {
         $invoice = Invoice::create([
-            'code' => $request->code,
+            // 'code' => $request->code,
             'invoiceDate' => $request->invoiceDate,
-            'quantity' => $request->quantity,
-            'totalPrice' => $request->totalPrice,
-            'subTotal' => $request->subTotal,
-            'discount' => $request->discount,
-            'downPayment' => $request->downPayment,
-            'grandTotal' => $request->grandTotal,
+            // 'quantity' => $request->quantity,
+            // 'totalPrice' => $request->totalPrice,
+            // 'subTotal' => $request->subTotal,
+            // 'discount' => $request->discount,
+            // 'downPayment' => $request->downPayment,
+            // 'grandTotal' => $request->grandTotal,
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
-            'dueDate' => $request->dueDate,
+            // 'dueDate' => $request->dueDate,
             'clientId' => $request->clientId,
             'staffId' => $request->staffId
 
         ]);
 
-        return redirect()->to('/invoice');
+        return redirect()->to('/transaction');
     }
 
     public function edit($invoiceId)

@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('itemId', 11)->unsigned();
-            $table->integer('invoiceId', 11)->unsigned();
-            $table->integer('packageId', 11)->unsigned();
+            $table->unsignedBigInteger('itemId');
+            $table->unsignedBigInteger('invoiceId');
+            $table->unsignedBigInteger('packageId');
             $table->integer('quantity');
-            $table->decimal('price', 11, 2);
-            $table->foreign('itemId')->references('id')->on('items');
-            $table->foreign('invoiceId')->references('id')->on('invoices');
-            $table->foreign('packageId')->references('id')->on('packages');
+            // $table->decimal('price', 11, 2);
+            
+            // Define foreign keys
+            $table->foreign('itemId')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('invoiceId')->references('id')->on('invoices')->onDelete('cascade');
+            $table->foreign('packageId')->references('id')->on('packages')->onDelete('cascade');
         });
     }
 

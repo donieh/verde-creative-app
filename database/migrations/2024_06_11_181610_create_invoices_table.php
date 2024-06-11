@@ -13,22 +13,19 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->integer('clientId', 11)->unsigned();
-            $table->integer('staffId', 11)->unsigned();
-            $table->string('code', 50);
+            $table->unsignedBigInteger('clientId');
+            $table->unsignedBigInteger('staffId');
             $table->date('invoiceDate');
-            $table->string('quantity', 11, 2);
-            $table->decimal('totalPrice', 11, 2);
-            $table->decimal('subTotal', 11, 2);
-            $table->decimal('discount',11, 2);
+            $table->decimal('discount', 11, 2);
             $table->decimal('downPayment', 11, 2);
-            $table->decimal('grandTotal', 11, 2);
             $table->date('startDate');
             $table->date('endDate');
             $table->date('dueDate');
-            $table->foreign('clientId')->references('id')->on('clients');
-            $table->foreign('staffId')->references('id')->on('staff');
-        });        
+            
+            // Define foreign keys
+            $table->foreign('clientId')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('staffId')->references('id')->on('staff')->onDelete('cascade');
+        });
     }
 
     /**

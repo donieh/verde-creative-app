@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-<!-- detail transaksi -->
+                <!-- detail transaksi -->
                 <div class="card-body shadow mb-4" style="width: 40%; margin-left: 20px; border-radius: 10px">
                     <div id="forms-container">
                         <!-- <div>---</div> -->

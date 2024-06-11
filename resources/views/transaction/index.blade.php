@@ -45,9 +45,9 @@
                                     <td>INVOICE #{{ str_pad($invoiceNumber, 3, '0', STR_PAD_LEFT) }}</td>
                                     <?php $invoiceNumber++; ?>
 
-                                    <td>{{ $invoice->startDate}}</td>
-                                    <td>{{ $invoice->endDate}}</td>
-                                    <td>{{ $invoice->invoiceDate}}</td>
+                                    <td>{{ $invoice->startDate }}</td>
+                                    <td>{{ $invoice->endDate }}</td>
+                                    <td>{{ $invoice->invoiceDate }}</td>
                                     <td><?php
                                     // Ambil invoiceDate dari baris yang sedang diproses
                                     $invoiceDate = $row['invoiceDate'];
@@ -73,19 +73,19 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form action="/transaction/{{ $invoice->id }}" method="POST"
-                                                onsubmit="return confirm('Do you want to delete this?');">
-                                                @method('delete')
-                                                {{ csrf_field() }}
-                                                <button type="submit" style="color: white; background: #c01605;"
-                                                    class="btn"><i class="fas fa-trash-alt"></i></button>
-                                            </form>
+                                            onsubmit="return confirm('Do you want to delete this?');">
+                                            @method('delete')
+                                            {{ csrf_field() }}
+                                            <button type="submit" style="color: white; background: #c01605;"
+                                                class="btn"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
-                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-   @endsection
+@endsection
