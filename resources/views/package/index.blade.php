@@ -3,17 +3,17 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-primaryx" style="color:black" ;>Manajemen Produk</h1>
+        <h1 class="h3 mb-2 text-primaryx" style="color:black" ;>Manajemen Paket</h1>
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold" style="color:black" ;>
-                    Data Produk
+                    Data Paket
                 </h6>
             </div>
 
             <div class="card-body">
-                <a href="/product/create" class="btn" style="color: white; background: #15452f">
+                <a href="/package/create" class="btn" style="color: white; background: #15452f">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
@@ -32,20 +32,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (\App\Models\Item::get() as $product)
+                            @foreach (\App\Models\Package::get() as $package)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->package }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $package->item->name }}</td>
+                                    <td>{{ $package->name }}</td>
+                                    <td>{{ $package->price }}</td>
                                     <td>
                                         <div style="display: flex; gap: 5px;">
-                                            <a href="/product/{{ $product->id }}/edit" class="btn"
+                                            <a href="/package/{{ $package->id }}/edit" class="btn"
                                                 style="color: white; background: #466d1d;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
 
-                                            <form action="/product/{{ $product->id }}" method="POST"
+                                            <form action="/package/{{ $package->id }}" method="POST"
                                                 onsubmit="return confirm('Do you want to delete this?');">
                                                 @method('delete')
                                                 {{ csrf_field() }}

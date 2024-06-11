@@ -12,13 +12,15 @@ class Package extends Model
     protected $table = 'packages';
 
     protected $fillable = [
-        'itemId',
         'name',
         'price',
+        'itemId',
     ];
+
+    public $timestamps = false;
 
     public function item()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Item::class, 'itemId', 'id');
     }
 }

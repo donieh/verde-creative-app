@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PackageController;
 use App\Models\Staff;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -81,16 +82,10 @@ Route::get('/item/{clientId}/edit', [ItemController::class, 'edit']);
 Route::put('/item/{clientId}', [ItemController::class, 'update']);
 Route::delete('/item/{clientId}', [ItemController::class, 'destroy']);
 
-// Route::get('/item', [ItemController::class, 'index']);
-// Route::get('/item/create', [ItemController::class, 'create']);
-// Route::post('/item', [ItemController::class, 'store']);
-// Route::get('/item/{itemId}/edit', [ItemController::class, 'edit']);
-// Route::put('/item/{itemId}', [ItemController::class, 'update']);
-// Route::delete('/item/{itemId}', [ItemController::class, 'destroy']); // delete -> http method ; destroy -> controller method
+Route::get('/package', [PackageController::class, 'index']);
+Route::get('/package/create', [PackageController::class, 'create']);
+Route::post('/package', [PackageController::class, 'store']);
+Route::get('/package/{clientId}/edit', [PackageController::class, 'edit']);
+Route::put('/package/{clientId}', [PackageController::class, 'update']);
+Route::delete('/package/{clientId}', [PackageController::class, 'destroy']);
 
-// Route::get('/product', [ProductController::class, 'index']);
-// Route::get('/product/create', [ProductController::class, 'create']);
-// Route::post('/product', [ProductController::class, 'store']);
-// Route::get('/product/{productId}/edit', [ProductController::class, 'edit']);
-// Route::put('/product/{productId}', [ProductController::class, 'update']);
-// Route::delete('/product/{productId}', [ProductController::class, 'destroy']); // delete -> http method ; destroy -> controller method
