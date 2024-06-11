@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PackageController;
 use App\Models\Staff;
@@ -88,4 +89,11 @@ Route::post('/package', [PackageController::class, 'store']);
 Route::get('/package/{clientId}/edit', [PackageController::class, 'edit']);
 Route::put('/package/{clientId}', [PackageController::class, 'update']);
 Route::delete('/package/{clientId}', [PackageController::class, 'destroy']);
+
+Route::get('/transaction', [InvoiceController::class, 'index']);
+Route::get('/transaction/create', [InvoiceController::class, 'create']);
+Route::post('/transaction', [InvoiceController::class, 'store']);
+Route::get('/transaction/{clientId}/edit', [InvoiceController::class, 'edit']);
+Route::put('/transaction/{clientId}', [InvoiceController::class, 'update']);
+Route::delete('/transaction/{clientId}', [InvoiceController::class, 'destroy']);
 

@@ -10,7 +10,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::with('invoiceItem')->get();
-        return view('invoice.index', compact('invoices'));
+        return view('transaction.index', compact('invoices'));
     }
 
     public function create()
