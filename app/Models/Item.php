@@ -14,8 +14,8 @@ class Item extends Model
     protected $fillable = [
         'id',
         'name',
-        'package',
-        'price'
+        // 'package',
+        // 'price'
     ];
 
     public $timestamps = false;

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ItemController;
 use App\Models\Staff;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -73,9 +74,23 @@ Route::get('/client/{clientId}/edit', [ClientController::class, 'edit']);
 Route::put('/client/{clientId}', [ClientController::class, 'update']);
 Route::delete('/client/{clientId}', [ClientController::class, 'destroy']);
 
-Route::get('/product', [ProductController::class, 'index']);
-Route::get('/product/create', [ProductController::class, 'create']);
-Route::post('/product', [ProductController::class, 'store']);
-Route::get('/product/{staffId}/edit', [ProductController::class, 'edit']);
-Route::put('/product/{staffId}', [ProductController::class, 'update']);
-Route::delete('/product/{staffId}', [ProductController::class, 'destroy']); // delete -> http method ; destroy -> controller method
+Route::get('/item', [ItemController::class, 'index']);
+Route::get('/item/create', [ItemController::class, 'create']);
+Route::post('/item', [ItemController::class, 'store']);
+Route::get('/item/{clientId}/edit', [ItemController::class, 'edit']);
+Route::put('/item/{clientId}', [ItemController::class, 'update']);
+Route::delete('/item/{clientId}', [ItemController::class, 'destroy']);
+
+// Route::get('/item', [ItemController::class, 'index']);
+// Route::get('/item/create', [ItemController::class, 'create']);
+// Route::post('/item', [ItemController::class, 'store']);
+// Route::get('/item/{itemId}/edit', [ItemController::class, 'edit']);
+// Route::put('/item/{itemId}', [ItemController::class, 'update']);
+// Route::delete('/item/{itemId}', [ItemController::class, 'destroy']); // delete -> http method ; destroy -> controller method
+
+// Route::get('/product', [ProductController::class, 'index']);
+// Route::get('/product/create', [ProductController::class, 'create']);
+// Route::post('/product', [ProductController::class, 'store']);
+// Route::get('/product/{productId}/edit', [ProductController::class, 'edit']);
+// Route::put('/product/{productId}', [ProductController::class, 'update']);
+// Route::delete('/product/{productId}', [ProductController::class, 'destroy']); // delete -> http method ; destroy -> controller method

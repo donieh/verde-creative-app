@@ -1,4 +1,4 @@
-@extends('layout.client-panel-layout')
+@extends('layout.user-panel-layout')
 
 @section('panel_content')
 <div class="container-fluid">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label>Alamat:</label>
-                    <input type="number" class="form-control" name="address" placeholder="Masukkan Alamat Perusahaan" required />
+                    <input type="text" class="form-control" name="address" placeholder="Masukkan Alamat Perusahaan" required />
                 </div>
 
             </div>

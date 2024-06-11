@@ -34,6 +34,7 @@
                 <a class="collapse-item" href="/user">User</a>
                 <a class="collapse-item" href="/client">Pelanggan</a>
                 <a class="collapse-item" href="?menu=transaction">Transaksi</a>
+                <a class="collapse-item" href="/item">Item</a>
                 <a class="collapse-item" href="/product">Produk</a>
             </div>
         </div>

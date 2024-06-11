@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('package', 50);
-            $table->decimal('price', 20, 2);
+            // $table->string('package', 50);
+            // $table->decimal('price', 20, 2);
         });
     }
 

@@ -5,36 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ItemController extends Controller
 {
-    public function index ()
+    public function index()
     {
-        return view('product.index');
+        return view('item.index');
     }
 
     public function create()
     {
-        return view('product.create');
+        return view('item.create');
     }
 
     public function store(Request $request)
     {
-        $product = Item::create([
+        $item = Item::create([
             'name' => $request->name,
-            'package' => $request->package,
-            'price' => $request->price,
+            // 'package' => $request->package,
+            // 'price' => $request->price,
            
         ]);
 
-        
-
-        return redirect()->to('/product');
+        return redirect()->to('/item');
     }
 
     public function edit($itemId)
     {
         $item = Item::findOrFail($itemId);
-        return view('product.edit', [
+        return view('item.edit', [
             'item' => $item,
         ]);
     }
@@ -43,17 +41,15 @@ class ProductController extends Controller
     {
         $item = Item::where('id',$itemId)->update([
             'name' => $request->name,
-            'package' => $request->package,
-            'price' => $request->price,
         ]);
 
-        return redirect()->to('/product');
+        return redirect()->to('/item');
     }
 
     public function destroy($itemId)
     {
         Item::where('id', $itemId)->delete();
 
-        return redirect()->to('/product');
+        return redirect()->to('/item');
     }
 }
