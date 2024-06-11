@@ -12,25 +12,18 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $fillable = [
-        'code',
         'invoiceDate',
-        'quantity',
-        'totalPrice',
-        'subTotal',
-        'discount',
-        'downPayment',
-        'grandTotal',
         'startDate',
         'endDate',
-        'dueDate'
-        // 'clientId',
-        // 'staffId',
+        'dueDate',
+        'staffId',
+        'clientId',
     ];
 
     public $timestamps = false;
 
-    public function invoice_items()
+    public function clients()
     {
-        return $this->belongsTo(InvoiceItem::class, 'clientId', 'staffId', 'id');
+        return $this->belongsTo(Client::class, 'clientId', 'id');
     }
 }

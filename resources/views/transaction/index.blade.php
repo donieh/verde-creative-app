@@ -42,28 +42,12 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $invoice->business }}</td>
-                                    <td>INVOICE #{{ str_pad($invoiceNumber, 3, '0', STR_PAD_LEFT) }}</td>
-                                    <?php $invoiceNumber++; ?>
+                                   <td>INVOICE #{{ str_pad($loop->index + 1, 3, '0', STR_PAD_LEFT) }}</td>
 
                                     <td>{{ $invoice->startDate }}</td>
                                     <td>{{ $invoice->endDate }}</td>
                                     <td>{{ $invoice->invoiceDate }}</td>
-                                    <td><?php
-                                    // Ambil invoiceDate dari baris yang sedang diproses
-                                    $invoiceDate = $row['invoiceDate'];
-                                    
-                                    // Konversi invoiceDate ke format timestamp menggunakan strtotime()
-                                    $invoiceTimestamp = strtotime($invoiceDate);
-                                    
-                                    // Tambahkan 15 hari ke invoiceTimestamp
-                                    $dueTimestamp = strtotime('+15 days', $invoiceTimestamp);
-                                    
-                                    // Konversi dueTimestamp ke format tanggal kembali menggunakan date()
-                                    $dueDate = date('Y-m-d', $dueTimestamp);
-                                    
-                                    // Tampilkan dueDate pada tabel
-                                    echo $dueDate;
-                                    ?></td>
+                                    <td>{{ $invoice->dueDate }}</td>
                                     <td>{{ $invoice->discount }}</td>
                                     <td>{{ $invoice->downpPayment }}</td>
 

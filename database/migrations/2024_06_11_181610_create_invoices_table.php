@@ -16,12 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('clientId');
             $table->unsignedBigInteger('staffId');
             $table->date('invoiceDate');
-            $table->decimal('discount', 11, 2);
-            $table->decimal('downPayment', 11, 2);
+            $table->decimal('discount', 11, 2)->nullable();
+            $table->decimal('downPayment', 11, 2)->nullable();
             $table->date('startDate');
             $table->date('endDate');
             $table->date('dueDate');
-            
+
             // Define foreign keys
             $table->foreign('clientId')->references('id')->on('clients')->onDelete('cascade');
             $table->foreign('staffId')->references('id')->on('staff')->onDelete('cascade');

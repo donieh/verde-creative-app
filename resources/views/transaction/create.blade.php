@@ -19,13 +19,17 @@
                         <div style="flex: 1; margin-right: 10px;">
                             <div class="form-group">
                                 <label>Nama Bisnis:</label>
-                                <input type="text" class="form-control" name="business"
-                                    placeholder="Masukkan Nama Bisnis" required />
+                                <select class="form-control" name="clientId" required>
+                                    <option value="">Pilih Klien</option>
+                                    @foreach ($clients as $client)
+                                        <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <!-- <div class="form-group">
-                        <label>No Invoice:</label>
-                        <input type="number" class="form-control" name="invoiceNumber" placeholder="Masukkan No Invoice" required />
-                    </div> -->
+                                <label>No Invoice:</label>
+                                <input type="number" class="form-control" name="invoiceNumber" placeholder="Masukkan No Invoice" required />
+                            </div> -->
                             <div class="form-group">
                                 <label>Tanggal Mulai:</label>
                                 <input type="date" class="form-control" name="startDate"
@@ -62,13 +66,21 @@
                             <!-- <div>---</div> -->
                             <div class="form-group">
                                 <label>Nama Item:</label>
-                                <input type="text" class="form-control" name="itemName[]"
-                                    placeholder="Masukkan Nama Item" required />
+                                <<select class="form-control" name="itemId" required>
+                                    <option value="">Pilih Item</option>
+                                    @foreach ($items as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                    </select>
                             </div>
                             <div class="form-group">
                                 <label>Nama Paket:</label>
-                                <input type="text" class="form-control" name="packageName[]"
-                                    placeholder="Masukkan Nama Paket" required />
+                                <select class="form-control" name="packageId" required>
+                                    <option value="">Pilih Paket</option>
+                                    @foreach ($packages as $package)
+                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Kuantitas:</label>
