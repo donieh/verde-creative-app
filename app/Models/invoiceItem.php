@@ -5,20 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class invoiceItems extends Model
+class InvoiceItem extends Model
 {
     use HasFactory;
-    use HasFactory;
-    public $table = 'invoice_items';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    protected $table = 'invoice_items';
 
-    protected $auditTimestamps = true;
-
-    public $fillable = [
+    protected $fillable = [
         'id',
         'quantity',
-        'price'
+        'price',
+        'invoiceId',
+        'itemId',
+        'packageId'
     ];
+
+    public $timestamps = false;
+    
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

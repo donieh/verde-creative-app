@@ -9,15 +9,9 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    public $table = "invoices";
+    protected $table = 'invoices';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
-
-    protected $auditTimestamps = true;
-
-    public $fillable = [
-        'id',
+    protected $fillable = [
         'code',
         'invoiceDate',
         'quantity',
@@ -28,6 +22,15 @@ class Invoice extends Model
         'grandTotal',
         'startDate',
         'endDate',
-        'dueDate',
+        'dueDate'
+        // 'clientId',
+        // 'staffId',
     ];
+
+    public $timestamps = false;
+
+    public function invoice_items()
+    {
+        return $this->belongsTo(InvoiceItem::class, 'clientId', 'staffId', 'id');
+    }
 }

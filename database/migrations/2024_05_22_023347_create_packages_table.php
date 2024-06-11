@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->integer('itemID', 11)->unsigned();
+            $table->integer('itemId', 11)->unsigned();
             $table->string('name', 50);
             $table->decimal('price', 11, 2);
-
-            $table->foreign('itemID')->references('id')->on('items');
+            $table->foreign('itemId')->references('id')->on('items');
         });
     }
 

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->integer('clientId', 11)->unsigned();
+            $table->integer('staffId', 11)->unsigned();
             $table->string('code', 50);
             $table->date('invoiceDate');
             $table->string('quantity', 11, 2);
@@ -24,8 +26,9 @@ return new class extends Migration
             $table->date('startDate');
             $table->date('endDate');
             $table->date('dueDate');
-            $table->timestamps();
-        });
+            $table->foreign('clientId')->references('id')->on('clients');
+            $table->foreign('staffId')->references('id')->on('staff');
+        });        
     }
 
     /**

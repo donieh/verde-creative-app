@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->id();
+            $table->integer('itemId', 11)->unsigned();
+            $table->integer('invoiceId', 11)->unsigned();
+            $table->integer('packageId', 11)->unsigned();
             $table->integer('quantity');
             $table->decimal('price', 11, 2);
-            $table->timestamps();
+            $table->foreign('itemId')->references('id')->on('items');
+            $table->foreign('invoiceId')->references('id')->on('invoices');
+            $table->foreign('packageId')->references('id')->on('packages');
         });
     }
 
