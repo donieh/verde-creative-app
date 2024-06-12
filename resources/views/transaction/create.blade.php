@@ -27,9 +27,9 @@
                                 </select>
                             </div>
                             <!-- <div class="form-group">
-                                <label>No Invoice:</label>
-                                <input type="number" class="form-control" name="invoiceNumber" placeholder="Masukkan No Invoice" required />
-                            </div> -->
+                                        <label>No Invoice:</label>
+                                        <input type="number" class="form-control" name="invoiceNumber" placeholder="Masukkan No Invoice" required />
+                                    </div> -->
                             <div class="form-group">
                                 <label>Tanggal Mulai:</label>
                                 <input type="date" class="form-control" name="startDate"
@@ -71,7 +71,7 @@
                                     @foreach ($items as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
-                                    </select>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Nama Paket:</label>
@@ -98,9 +98,19 @@
                             newForm.classList.add('form-group');
                             newForm.innerHTML = `
             <label>Nama Item:</label>
-            <input type="text" class="form-control" name="itemName[]" placeholder="Masukkan Nama Item" required />
+          <select class="form-control" name="itemId" required>
+                                    <option value="">Pilih Item</option>
+                                    @foreach ($items as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                    </select>
             <label>Nama Paket:</label>
-            <input type="text" class="form-control" name="packageName[]" placeholder="Masukkan Nama Paket" required />
+            <select class="form-control" name="packageId" required>
+                                    <option value="">Pilih Paket</option>
+                                    @foreach ($packages as $package)
+                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                    @endforeach
+                                </select>
             <label>Kuantitas:</label>
             <input type="number" class="form-control" name="quantity[]" placeholder="Masukkan Kuantitas" required />
         `;
