@@ -22,6 +22,8 @@ class InvoiceController extends Controller
         return view('transaction.create', compact('clients', 'items', 'packages'));
     }
 
+    // InvoiceController.php
+
     public function store(Request $request)
     {
         $invoiceDate = $request->invoiceDate;
@@ -38,8 +40,19 @@ class InvoiceController extends Controller
             'downPayment' => $request->downPayment,
         ]);
 
+        // Store Invoice Items
+        foreach ($request->itemId as $key => $itemId) {
+            \App\Models\InvoiceItem::create([
+                'invoiceId' => $invoice->id,
+                'itemId' => $itemId,
+                'packageId' => $request->packageId[$key],
+                'quantity' => $request->quantity[$key],
+            ]);
+        }
+
         return redirect()->to('/transaction');
     }
+
 
     public function edit($invoiceId)
     {

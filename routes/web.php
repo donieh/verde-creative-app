@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoiceItemController;
 use App\Models\Staff;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -97,3 +98,7 @@ Route::get('/transaction/{clientId}/edit', [InvoiceController::class, 'edit']);
 Route::put('/transaction/{clientId}', [InvoiceController::class, 'update']);
 Route::delete('/transaction/{clientId}', [InvoiceController::class, 'destroy']);
 
+Route::post('/invoice-items', [InvoiceItemController::class, 'store']);
+Route::put('/invoice-items/{id}', [InvoiceItemController::class, 'update']);
+Route::delete('/invoice-items/{id}', [InvoiceItemController::class, 'destroy']);
+Route::get('/get-packages-by-item/{itemId}', [InvoiceItemController::class, 'getPackagesByItem']);
