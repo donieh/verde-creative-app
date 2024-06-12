@@ -49,7 +49,7 @@
                                     <td>{{ $invoice->invoiceDate }}</td>
                                     <td>{{ $invoice->dueDate }}</td>
                                     <td>{{ $invoice->discount }}</td>
-                                    <td>{{ $invoice->downpPayment }}</td>
+                                    <td>{{ $invoice->downPayment }}</td>
 
                                     <td>
                                         <a href="/transaction/{{ $invoice->id }}/edit" class="btn"

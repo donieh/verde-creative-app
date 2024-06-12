@@ -34,6 +34,8 @@ class InvoiceController extends Controller
             'clientId' => $request->clientId,
             'staffId' => 1,
             'dueDate' => $dueDate,
+            'discount' => $request->discount,
+            'downPayment' => $request->downPayment,
         ]);
 
         return redirect()->to('/transaction');

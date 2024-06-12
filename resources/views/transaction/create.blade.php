@@ -66,7 +66,7 @@
                             <!-- <div>---</div> -->
                             <div class="form-group">
                                 <label>Nama Item:</label>
-                                <<select class="form-control" name="itemId" required>
+                                <select class="form-control" name="itemId" required>
                                     <option value="">Pilih Item</option>
                                     @foreach ($items as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>

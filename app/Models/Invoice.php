@@ -18,6 +18,8 @@ class Invoice extends Model
         'dueDate',
         'staffId',
         'clientId',
+        'discount',
+        'downPayment',
     ];
 
     public $timestamps = false;
