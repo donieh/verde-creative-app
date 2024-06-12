@@ -41,7 +41,7 @@
                             @foreach (\App\Models\Invoice::get() as $invoice)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $invoice->business }}</td>
+                                    <td>{{ $invoice->clients->name }}</td>
                                    <td>INVOICE #{{ str_pad($loop->index + 1, 3, '0', STR_PAD_LEFT) }}</td>
 
                                     <td>{{ $invoice->startDate }}</td>
