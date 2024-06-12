@@ -2,15 +2,11 @@
 
 @section('panel_content')
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-custom" style="color:black">Manajemen Transaksi</h1>
-
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-custom" style="color:black">
-                    Form Tambah Transaksi
-                </h6>
+                <h6 class="m-0 font-weight-bold text-custom" style="color:black">Form Tambah Transaksi</h6>
             </div>
             <form action="/transaction" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -26,36 +22,27 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <!-- <div class="form-group">
-                                        <label>No Invoice:</label>
-                                        <input type="number" class="form-control" name="invoiceNumber" placeholder="Masukkan No Invoice" required />
-                                    </div> -->
                             <div class="form-group">
                                 <label>Tanggal Mulai:</label>
-                                <input type="date" class="form-control" name="startDate"
-                                    placeholder="Masukkan Tanggal Mulai" required />
+                                <input type="date" class="form-control" name="startDate" placeholder="Masukkan Tanggal Mulai" required />
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Selesai:</label>
-                                <input type="date" class="form-control" name="endDate"
-                                    placeholder="Masukkan Tanggal Selesai" required />
+                                <input type="date" class="form-control" name="endDate" placeholder="Masukkan Tanggal Selesai" required />
                             </div>
                         </div>
                         <div style="flex: 1; margin-right: 10px;">
                             <div class="form-group">
                                 <label>Tanggal Invoice:</label>
-                                <input type="date" class="form-control" name="invoiceDate" placeholder="Tanggal Invoice"
-                                    required />
+                                <input type="date" class="form-control" name="invoiceDate" placeholder="Tanggal Invoice" required />
                             </div>
                             <div class="form-group">
                                 <label>Discount:</label>
-                                <input type="number" class="form-control" name="discount"
-                                    placeholder="Masukkan Jumlah Discount" />
+                                <input type="number" class="form-control" name="discount" placeholder="Masukkan Jumlah Discount" />
                             </div>
                             <div class="form-group">
                                 <label>Down Payment:</label>
-                                <input type="number" class="form-control" name="downPayment"
-                                    placeholder="Masukkan Jumlah Down Payment" />
+                                <input type="number" class="form-control" name="downPayment" placeholder="Masukkan Jumlah Down Payment" />
                             </div>
                         </div>
                     </div>
@@ -63,10 +50,9 @@
                     <!-- detail transaksi -->
                     <div class="card-body shadow mb-4" style="width: 40%; margin-left: 20px; border-radius: 10px">
                         <div id="forms-container">
-                            <!-- <div>---</div> -->
                             <div class="form-group">
                                 <label>Nama Item:</label>
-                                <select class="form-control" name="itemId" required>
+                                <select class="form-control" name="itemId[]" required onchange="loadPackages(this)">
                                     <option value="">Pilih Item</option>
                                     @foreach ($items as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -75,45 +61,66 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama Paket:</label>
-                                <select class="form-control" name="packageId" required>
+                                <select class="form-control" name="packageId[]" required>
                                     <option value="">Pilih Paket</option>
-                                    @foreach ($packages as $package)
-                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
-                                    @endforeach
+                                    <!-- Packages will be loaded dynamically based on selected item -->
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Kuantitas:</label>
-                                <input type="number" class="form-control" name="quantity[]"
-                                    placeholder="Masukkan Kuantitas" required />
+                                <input type="number" class="form-control" name="quantity[]" placeholder="Masukkan Kuantitas" required />
                             </div>
                         </div>
                         <button type="button" id="add-form" class="btn btn-primary">Tambah</button>
                     </div>
 
                     <script>
+                        function loadPackages(select) {
+                            var itemId = select.value;
+                            var packageSelect = select.parentElement.nextElementSibling.children[1];
+                            packageSelect.innerHTML = '<option value="">Loading...</option>';
+
+                            if (itemId) {
+                                fetch(`/get-packages-by-item/${itemId}`)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        packageSelect.innerHTML = '<option value="">Pilih Paket</option>';
+                                        data.forEach(package => {
+                                            var option = document.createElement('option');
+                                            option.value = package.id;
+                                            option.textContent = package.name;
+                                            packageSelect.appendChild(option);
+                                        });
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching packages:', error);
+                                        packageSelect.innerHTML = '<option value="">Error loading packages</option>';
+                                    });
+                            } else {
+                                packageSelect.innerHTML = '<option value="">Pilih Item terlebih dahulu</option>';
+                            }
+                        }
+
                         document.getElementById('add-form').addEventListener('click', function() {
                             var formsContainer = document.getElementById('forms-container');
                             var newForm = document.createElement('div');
                             newForm.classList.add('form-group');
                             newForm.innerHTML = `
-            <label>Nama Item:</label>
-          <select class="form-control" name="itemId" required>
+                                <label>Nama Item:</label>
+                                <select class="form-control" name="itemId[]" required onchange="loadPackages(this)">
                                     <option value="">Pilih Item</option>
                                     @foreach ($items as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
-                                    </select>
-            <label>Nama Paket:</label>
-            <select class="form-control" name="packageId" required>
-                                    <option value="">Pilih Paket</option>
-                                    @foreach ($packages as $package)
-                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
-                                    @endforeach
                                 </select>
-            <label>Kuantitas:</label>
-            <input type="number" class="form-control" name="quantity[]" placeholder="Masukkan Kuantitas" required />
-        `;
+                                <label>Nama Paket:</label>
+                                <select class="form-control" name="packageId[]" required>
+                                    <option value="">Pilih Paket</option>
+                                    <!-- Packages will be loaded dynamically based on selected item -->
+                                </select>
+                                <label>Kuantitas:</label>
+                                <input type="number" class="form-control" name="quantity[]" placeholder="Masukkan Kuantitas" required />
+                            `;
                             formsContainer.appendChild(newForm);
                         });
                     </script>
@@ -128,7 +135,6 @@
                     </a>
                 </div>
             </form>
-
         </div>
     </div>
 @endsection

@@ -7,55 +7,28 @@ use Illuminate\Http\Request;
 
 class InvoiceItemController extends Controller
 {
-    public function index()
-    {
-        return view('invoiceItem.index');
-    }
-
-    public function create()
-    {
-        return view('invoiceItem.create');
-    }
-
     public function store(Request $request)
     {
-        $item = InvoiceItem::create([
-            'quantity' => $request->quantity,
-            'price' => $request->price,
-            'invoiceId' => $request->invoiceId,
-            'itemId' => $request->itemId,
-            'packageId' => $request->packageId
-           
-        ]);
-
-        return redirect()->to('/invoiceItem');
+        $invoiceItem = InvoiceItem::create($request->all());
+        return response()->json($invoiceItem, 201);
     }
 
-    public function edit($invoiceItemId)
+    public function update(Request $request, $id)
     {
-        $invoiceItem = InvoiceItem::findOrFail($invoiceItemId);
-        return view('invoiceItem.edit', [
-            'invoiceItem' => $invoiceItem,
-        ]);
+        $invoiceItem = InvoiceItem::findOrFail($id);
+        $invoiceItem->update($request->all());
+        return response()->json($invoiceItem, 200);
     }
 
-    public function update(Request $request,$invoiceItemId)
+    public function destroy($id)
     {
-        $invoiceItem = InvoiceItem::where('id',$invoiceItemId)->update([
-            'quantity' => $request->quantity,
-            'price' => $request->price,
-            'invoiceId' => $request->invoiceId,
-            'itemId' => $request->itemId,
-            'packageId' => $request->packageId
-        ]);
-
-        return redirect()->to('/invoiceItem');
+        InvoiceItem::destroy($id);
+        return response()->json(null, 204);
     }
 
-    public function destroy($invoiceItemId)
+    public function getPackagesByItem($itemId)
     {
-        Item::where('id', $invoiceItemId)->delete();
-
-        return redirect()->to('/invoiceItem');
+        $packages = \App\Models\Package::where('itemId', $itemId)->get();
+        return response()->json($packages);
     }
 }

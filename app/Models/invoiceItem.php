@@ -12,18 +12,26 @@ class InvoiceItem extends Model
     protected $table = 'invoice_items';
 
     protected $fillable = [
-        'id',
-        'quantity',
-        'price',
         'invoiceId',
         'itemId',
-        'packageId'
+        'packageId',
+        'quantity',
     ];
 
     public $timestamps = false;
-    
+
     public function invoice()
     {
-        return $this->hasMany(Invoice::class);
+        return $this->belongsTo(Invoice::class, 'invoiceId');
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'itemId');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class, 'packageId');
     }
 }
