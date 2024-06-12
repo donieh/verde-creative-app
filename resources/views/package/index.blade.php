@@ -37,7 +37,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $package->item->name }}</td>
                                     <td>{{ $package->name }}</td>
-                                    <td>{{ $package->price }}</td>
+                                    <td>{{ 'Rp ' . number_format($package->price, 0, ',', '.') }}</td>
                                     <td>
                                         <div style="display: flex; gap: 5px;">
                                             <a href="/package/{{ $package->id }}/edit" class="btn"

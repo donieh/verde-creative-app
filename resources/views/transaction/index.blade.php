@@ -48,8 +48,8 @@
                                     <td>{{ $invoice->endDate }}</td>
                                     <td>{{ $invoice->invoiceDate }}</td>
                                     <td>{{ $invoice->dueDate }}</td>
-                                    <td>{{ $invoice->discount }}</td>
-                                    <td>{{ $invoice->downPayment }}</td>
+                                    <td>{{ 'Rp ' . number_format($invoice->discount, 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp ' . number_format($invoice->downPayment, 0, ',', '.') }}</td>
 
                                     <td>
                                         <a href="/transaction/{{ $invoice->id }}/edit" class="btn"
