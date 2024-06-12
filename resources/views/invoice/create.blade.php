@@ -12,15 +12,15 @@
                     Form Tambah Paket
                 </h6>
             </div>
-            <form action="/package" method="POST" enctype="multipart/form-data">
+            <form action="/invoice" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="form-group">
                         <label>Nama Item</label>
-                        <select class="form-control" name="itemId" required>
+                        <select class="form-control" name="invoiceItemId" required>
                             <option value="">Pilih Item</option>
-                            @foreach ($items as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @foreach ($invoiceItems as $invoiceItem)
+                                <option value="{{ $invoiceItem->id }}">{{ $invoiceItem->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -41,7 +41,7 @@
                     <button type="submit" class="btn" style="color: white; background: navy">
                         <i class="fas fa-save"></i> Simpan
                     </button>
-                    <a href="/package" class="btn" style="color: white; background: orange">
+                    <a href="/invoice" class="btn" style="color: white; background: orange">
                         <i class="fas fa-arrow-left"></i> Kembali
                     </a>
                 </div>

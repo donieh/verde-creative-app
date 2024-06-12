@@ -12,7 +12,7 @@
                     Form Tambah Item
                 </h6>
             </div>
-            <form action="/item" method="POST" enctype="multipart/form-data">
+            <form action="/invoiceItem" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="form-group">
@@ -26,7 +26,7 @@
                     <button type="submit" class="btn" style="color: white; background: navy">
                         <i class="fas fa-save"></i> Simpan
                     </button>
-                    <a href="/item" class="btn" style="color: white; background: orange">
+                    <a href="/invoiceItem" class="btn" style="color: white; background: orange">
                         <i class="fas fa-arrow-left"></i> Kembali
                     </a>
                 </div>
