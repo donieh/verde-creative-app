@@ -15,10 +15,10 @@
         <form action="/client" method="POST" enctype="multipart/form-data">
              {{ csrf_field() }}
             <div class="card-body">
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label>Kode:</label>
                     <input type="text" class="form-control" name="code" placeholder="Masukkan Kode Perusahaan" required />
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label>Nama Perusahaan:</label>
                     <input type="text" class="form-control" name="name" placeholder="Masukkan Nama Perusahaan" required />

@@ -21,7 +21,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $client = Client::create([
-            'code' => $request->code,
+            // 'code' => $request->code,
             'name' => $request->name,
             'contactPerson' => $request->contactPerson,
             'phone' => $request->phone,
@@ -42,7 +42,7 @@ class ClientController extends Controller
     public function update(Request $request,$clientId)
     {
         $client = Client::where('id',$clientId)->update([
-            'code' => $request->code,
+            // 'code' => $request->code,
             'name' => $request->name,
             'contactPerson' => $request->contactPerson,
             'phone' => $request->phone,

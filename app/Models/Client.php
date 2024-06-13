@@ -17,7 +17,7 @@ class Client extends Model
 
     public $fillable = [
         'id',
-        'code',
+        // 'code',
         'name',
         'contactPerson',
         'phone',

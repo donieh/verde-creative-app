@@ -37,15 +37,15 @@
 
                         <tbody>
                             @foreach (\App\Models\Client::get() as $client)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $client->code}}</td>
-                                <td>{{ $client->name }}</td>
-                                <td>{{ $client->contactPerson}}</td>
-                                <td>{{ $client->phone }}</td>
-                                <td>{{ $client->address}}</td>
-                                <td>
-                                <div style="display: flex; gap: 5px;">
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>CL{{ str_pad($loop->index + 1, 3, '0', STR_PAD_LEFT) }}</td>
+                                    <td>{{ $client->name }}</td>
+                                    <td>{{ $client->contactPerson }}</td>
+                                    <td>{{ $client->phone }}</td>
+                                    <td>{{ $client->address }}</td>
+                                    <td>
+                                        <div style="display: flex; gap: 5px;">
                                             <a href="/client/{{ $client->id }}/edit" class="btn"
                                                 style="color: white; background: #466d1d;">
                                                 <i class="fas fa-edit"></i>
