@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
+use App\Models\Package;
 
 class InvoiceItemController extends Controller
 {
@@ -28,7 +29,7 @@ class InvoiceItemController extends Controller
 
     public function getPackagesByItem($itemId)
     {
-        $packages = \App\Models\Package::where('itemId', $itemId)->get();
+        $packages = Package::where('itemId', $itemId)->get();
         return response()->json($packages);
     }
 }
