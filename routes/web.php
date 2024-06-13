@@ -1,6 +1,8 @@
 <?php
 
 // use App\Http\Controllers\ProductController;
+
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ItemController;
@@ -56,6 +58,14 @@ Route::post('/login', function (Request $request) {
         'username' => 'account invalid',
     ])->onlyInput('username');
 });
+
+Route::post('/logout', function (Request $request) {
+    // End the session and logout the user
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect('/login');
+})->name('logout');
 
 Route::get('/dashboard', function() {
     return view('dashboard.index');
