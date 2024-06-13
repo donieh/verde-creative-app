@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use App\Models\Client;
+use App\Models\Item;
+use App\Models\Package;
+use App\Models\InvoiceItem;
+
+
 
 class InvoiceController extends Controller
 {
@@ -16,9 +22,9 @@ class InvoiceController extends Controller
     public function create()
     {
         // $invoiceItems = \App\Models\InvoiceItem::all();
-        $clients = \App\Models\Client::all();
-        $items = \App\Models\Item::all();
-        $packages = \App\Models\Package::all();
+        $clients = Client::all();
+        $items = Item::all();
+        $packages = Package::all();
         return view('transaction.create', compact('clients', 'items', 'packages'));
     }
 
@@ -42,7 +48,7 @@ class InvoiceController extends Controller
 
         // Store Invoice Items
         foreach ($request->itemId as $key => $itemId) {
-            \App\Models\InvoiceItem::create([
+            InvoiceItem::create([
                 'invoiceId' => $invoice->id,
                 'itemId' => $itemId,
                 'packageId' => $request->packageId[$key],
@@ -56,7 +62,7 @@ class InvoiceController extends Controller
 
     public function edit($invoiceId)
     {
-        $invoiceItems = \App\Models\InvoiceItem::all();
+        $invoiceItems = InvoiceItem::all();
         // return view('package.create', compact('items'));
 
         $invoice = Invoice::findOrFail($invoiceId);

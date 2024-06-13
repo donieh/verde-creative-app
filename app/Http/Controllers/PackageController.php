@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use Illuminate\Http\Request;
+use App\Models\Item;
+
 
 class PackageController extends Controller
 {
@@ -15,7 +17,7 @@ class PackageController extends Controller
 
     public function create()
     {
-        $items = \App\Models\Item::all();
+        $items = Item::all();
         return view('package.create', compact('items'));
     }
 
@@ -33,7 +35,7 @@ class PackageController extends Controller
 
     public function edit($packageId)
     {
-        $items = \App\Models\Item::all();
+        $items = Item::all();
         // return view('package.create', compact('items'));
 
         $package = Package::findOrFail($packageId);
