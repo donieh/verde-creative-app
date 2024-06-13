@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-white sidebar sidebar-light accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-text mx-3">VERDE Creative Admin</div>
     </a>
     
@@ -11,14 +11,14 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
 
     <!-- Nav Item - Website -->
     <li class="nav-item">
-        <a class="nav-link" href="../../index.php">
+        <a class="nav-link" href="/">
             <i class="fas fa-fw fa-home"></i>
             <span>Website VERDE Creative</span></a>
     </li>
