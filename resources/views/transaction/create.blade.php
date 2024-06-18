@@ -83,6 +83,7 @@
                     <!-- Hidden input to store added items -->
                     <input type="hidden" id="invoiceItems" name="invoiceItems" value="[]">
 
+
                     {{-- table detail transaksi --}}
                     <div class="card-body">
                         <div class="table-responsive">

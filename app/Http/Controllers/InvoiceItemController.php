@@ -3,31 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\InvoiceItem;
+// use App\Models\Invoice;
+// use App\Models\Client;
+// use App\Models\Item;
 use Illuminate\Http\Request;
-use App\Models\Item;
-use App\Models\Package;
 
 class InvoiceItemController extends Controller
 {
-    public function store(Request $request, $invoiceId)
+    public function store(Request $request)
     {
-        foreach ($request->itemId as $key => $itemId) {
+        $invoiceItems = json_decode($request->invoiceItems, true);
+
+        foreach ($invoiceItems as $item) {
             InvoiceItem::create([
-                'invoiceId' => $invoiceId,
-                'itemId' => $itemId,
-                'packageId' => $request->packageId[$key],
-                'quantity' => $request->quantity[$key],
+                'invoiceId' => $request->invoiceId,
+                'itemId' => $item['itemId'],
+                'packageId' => $item['packageId'],
+                'quantity' => $item['quantity']
             ]);
         }
 
-        return redirect()->to('/transaction/' . $invoiceId . '/edit');
+        return response()->json(['message' => 'Items added successfully'], 200);
     }
 
-    public function destroy($itemId)
-    {
-        $invoiceItem = InvoiceItem::findOrFail($itemId);
-        $invoiceId = $invoiceItem->invoiceId;
-        $invoiceItem->delete();
-        return redirect()->to('/transaction/' . $invoiceId . '/edit');
-    }
+//     public function edit($invoiceId)
+// {
+//     $invoice = Invoice::with('items.item', 'items.package')->findOrFail($invoiceId);
+//     $clients = Client::all();
+//     $items = Item::all();
+//     return view('transaction.edit', compact('invoice', 'clients', 'items'));
+// }
 }

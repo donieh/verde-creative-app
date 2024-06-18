@@ -1,144 +1,247 @@
 @extends('layout.user-panel-layout')
 
 @section('panel_content')
-<div class="container-fluid">
-    <h1 class="h3 mb-2 text-custom" style="color:black">Edit Transaksi</h1>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-custom" style="color:black">Form Edit Transaksi</h6>
-        </div>
-        <form action="/invoice/{{ $invoice->id }}" method="POST" enctype="multipart/form-data">
-            @method('PUT')
-            {{ csrf_field() }}
-            <div class="card-body">
-                <div style="display: flex; gap: 10px;">
-                    <div style="flex: 1;">
-                        <div class="form-group">
-                            <label>Nama Bisnis:</label>
-                            <select class="form-control" name="clientId" required>
-                                <option value="">Pilih Klien</option>
-                                @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}" {{ $invoice->clientId == $client->id ? 'selected' : '' }}>{{ $client->name }}</option>
-                                @endforeach
-                            </select>
+    <div class="container-fluid">
+        <h1 class="h3 mb-2 text-custom" style="color:black">Edit Transaksi</h1>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-custom" style="color:black">Form Edit Transaksi</h6>
+            </div>
+            <form action="/invoice/{{ $invoice->id }}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
+                {{ csrf_field() }}
+                <div class="card-body">
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label>Nama Bisnis:</label>
+                                <select class="form-control" name="clientId" required>
+                                    <option value="">Pilih Klien</option>
+                                    @foreach ($clients as $client)
+                                        <option value="{{ $client->id }}"
+                                            {{ $invoice->clientId == $client->id ? 'selected' : '' }}>{{ $client->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Mulai:</label>
+                                <input type="date" class="form-control" name="startDate"
+                                    value="{{ $invoice->startDate }}" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Selesai:</label>
+                                <input type="date" class="form-control" name="endDate" value="{{ $invoice->endDate }}"
+                                    required />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tanggal Mulai:</label>
-                            <input type="date" class="form-control" name="startDate" value="{{ $invoice->startDate }}" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Selesai:</label>
-                            <input type="date" class="form-control" name="endDate" value="{{ $invoice->endDate }}" required />
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label>Tanggal Invoice:</label>
+                                <input type="date" class="form-control" name="invoiceDate"
+                                    value="{{ $invoice->invoiceDate }}" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Discount:</label>
+                                <input type="number" class="form-control" name="discount" value="{{ $invoice->discount }}"
+                                    placeholder="Masukkan Jumlah Discount" />
+                            </div>
+                            <div class="form-group">
+                                <label>Down Payment:</label>
+                                <input type="number" class="form-control" name="downPayment"
+                                    value="{{ $invoice->downPayment }}" placeholder="Masukkan Jumlah Down Payment" />
+                            </div>
                         </div>
                     </div>
-                    <div style="flex: 1;">
-                        <div class="form-group">
-                            <label>Tanggal Invoice:</label>
-                            <input type="date" class="form-control" name="invoiceDate" value="{{ $invoice->invoiceDate }}" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Discount:</label>
-                            <input type="number" class="form-control" name="discount" value="{{ $invoice->discount }}" placeholder="Masukkan Jumlah Discount" />
-                        </div>
-                        <div class="form-group">
-                            <label>Down Payment:</label>
-                            <input type="number" class="form-control" name="downPayment" value="{{ $invoice->downPayment }}" placeholder="Masukkan Jumlah Down Payment" />
-                        </div>
-                    </div>
-                </div>
 
-                <div class="card-body shadow mb-4" style="border-radius: 10px;">
-                    <div id="forms-container">
-                        @foreach ($invoice->items as $item)
-                            <div class="form-group" style="margin-bottom: 10px;">
+                    {{-- detail transaksi --}}
+                    <div class="card-body shadow mb-4" style="width: 40%; margin-left: 20px; border-radius: 10px">
+                        <div id="forms-container">
+                            <div class="form-group">
                                 <label>Nama Item:</label>
-                                <select class="form-control" name="itemId[]" required onchange="loadPackages(this)">
+                                <select class="form-control" id="itemSelect" onchange="loadPackages(this)">
                                     <option value="">Pilih Item</option>
-                                    @foreach ($items as $itm)
-                                        <option value="{{ $itm->id }}" {{ $item->itemId == $itm->id ? 'selected' : '' }}>{{ $itm->name }}</option>
+                                    @foreach ($items as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group" style="margin-bottom: 10px;">
+                            <div class="form-group">
                                 <label>Nama Paket:</label>
-                                <select class="form-control" name="packageId[]" required>
+                                <select class="form-control" id="packageSelect">
                                     <option value="">Pilih Paket</option>
-                                    @foreach ($item->item->packages as $package)
-                                        <option value="{{ $package->id }}" {{ $item->packageId == $package->id ? 'selected' : '' }}>{{ $package->name }}</option>
-                                    @endforeach
+                                    <!-- Packages will be loaded dynamically based on selected item -->
                                 </select>
                             </div>
-                            <div class="form-group" style="margin-bottom: 10px;">
+                            <div class="form-group">
                                 <label>Kuantitas:</label>
-                                <input type="number" class="form-control" name="quantity[]" value="{{ $item->quantity }}" placeholder="Masukkan Kuantitas" required />
+                                <input type="number" class="form-control" id="quantityInput"
+                                    placeholder="Masukkan Kuantitas" />
                             </div>
-                        @endforeach
+                        </div>
+                        <button type="button" id="add-form" class="btn btn-primary">Tambah</button>
                     </div>
-                    <button type="button" id="add-form" class="btn btn-primary">Tambah</button>
+
+                    <!-- Hidden input to store added items -->
+                    <input type="hidden" id="invoiceItems" name="invoiceItems" value="{{ json_encode($invoice->items) }}">
+
+                    {{-- table detail transaksi --}}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th width="10">No</th>
+                                        <th width="10">Nama Item</th>
+                                        <th width="100">Nama Paket</th>
+                                        <th width="100">Kuantitas</th>
+                                        <th width="100">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoiceItemsTable">
+                                    @foreach ($invoice->items as $index => $item)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $item->item->name }}</td>
+                                            <td>{{ $item->package->name }}</td>
+                                            <td>{{ $item->quantity }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-footer">
-                <button type="submit" class="btn btn-dark">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-                <a href="/transaction" class="btn btn-warning">
-                    <i class="fas fa-arrow-left"></i> Kembali
-                </a>
-            </div>
-        </form>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fas fa-save"></i> Simpan
+                    </button>
+                    <a href="/transaction" class="btn btn-warning">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<script>
-    function loadPackages(select) {
-        var itemId = select.value;
-        var packageSelect = select.parentElement.nextElementSibling.querySelector('select[name="packageId[]"]');
-        packageSelect.innerHTML = '<option value="">Loading...</option>';
+    <script>
+        function loadPackages(select) {
+            var itemId = select.value;
+            var packageSelect = document.getElementById('packageSelect');
+            packageSelect.innerHTML = '<option value="">Loading...</option>';
 
-        if (itemId) {
-            fetch(`/get-packages-by-item/${itemId}`)
-                .then(response => response.json())
-                .then(data => {
-                    packageSelect.innerHTML = '<option value="">Pilih Paket</option>';
-                    data.forEach(package => {
-                        var option = document.createElement('option');
-                        option.value = package.id;
-                        option.textContent = package.name;
-                        packageSelect.appendChild(option);
+            if (itemId) {
+                fetch(`/get-packages-by-item/${itemId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        packageSelect.innerHTML = '<option value="">Pilih Paket</option>';
+                        data.forEach(package => {
+                            var option = document.createElement('option');
+                            option.value = package.id;
+                            option.textContent = package.name;
+                            packageSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching packages:', error);
+                        packageSelect.innerHTML = '<option value="">Error loading packages</option>';
                     });
-                })
-                .catch(error => {
-                    console.error('Error fetching packages:', error);
-                    packageSelect.innerHTML = '<option value="">Error loading packages</option>';
-                });
-        } else {
-            packageSelect.innerHTML = '<option value="">Pilih Item terlebih dahulu</option>';
+            } else {
+                packageSelect.innerHTML = '<option value="">Pilih Item terlebih dahulu</option>';
+            }
         }
-    }
 
-    document.getElementById('add-form').addEventListener('click', function() {
-        var formsContainer = document.getElementById('forms-container');
-        var newForm = document.createElement('div');
-        newForm.classList.add('form-group');
-        newForm.style.marginBottom = '10px';
-        newForm.innerHTML = `
-            <label>Nama Item:</label>
-            <select class="form-control" name="itemId[]" required onchange="loadPackages(this)">
-                <option value="">Pilih Item</option>
-                @foreach ($items as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                @endforeach
-            </select>
-            <label>Nama Paket:</label>
-            <select class="form-control" name="packageId[]" required>
-                <option value="">Pilih Paket</option>
-                <!-- Packages will be loaded dynamically based on selected item -->
-            </select>
-            <label>Kuantitas:</label>
-            <input type="number" class="form-control" name="quantity[]" placeholder="Masukkan Kuantitas" required />
-        `;
-        formsContainer.appendChild(newForm);
-    });
-</script>
+        document.getElementById('add-form').addEventListener('click', function() {
+            var itemSelect = document.getElementById('itemSelect');
+            var packageSelect = document.getElementById('packageSelect');
+            var quantityInput = document.getElementById('quantityInput');
+
+            if (itemSelect.value && packageSelect.value && quantityInput.value) {
+                var itemText = itemSelect.options[itemSelect.selectedIndex].text;
+                var packageText = packageSelect.options[packageSelect.selectedIndex].text;
+                var quantity = quantityInput.value;
+
+                var table = document.getElementById('invoiceItemsTable');
+                var row = table.insertRow();
+                row.innerHTML = `
+                    <td>${table.rows.length}</td>
+                    <td>${itemText}</td>
+                    <td>${packageText}</td>
+                    <td>${quantity}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
+                    </td>
+                `;
+
+                var items = JSON.parse(document.getElementById('invoiceItems').value);
+                items.push({
+                    itemId: itemSelect.value,
+                    packageId: packageSelect.value,
+                    quantity: quantity
+                });
+                document.getElementById('invoiceItems').value = JSON.stringify(items);
+
+                itemSelect.value = '';
+                packageSelect.innerHTML = '<option value="">Pilih Paket</option>';
+                quantityInput.value = '';
+            } else {
+                alert('Isi semua field');
+            }
+        });
+
+        function removeRow(button) {
+            var row = button.parentElement.parentElement;
+            var index = row.rowIndex - 1;
+            var items = JSON.parse(document.getElementById('invoiceItems').value);
+            items.splice(index, 1);
+            document.getElementById('invoiceItems').value = JSON.stringify(items);
+            row.remove();
+            updateTableRowNumbers();
+        }
+
+        function updateTableRowNumbers() {
+            var table = document.getElementById('invoiceItemsTable');
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].cells[0].innerText = i + 1;
+            }
+        }
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function updateDates() {
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            const invoiceDateInput = document.getElementById('invoiceDate');
+            const startDate = new Date(startDateInput.value);
+
+            if (startDateInput.value) {
+                const endDate = new Date(startDate);
+                endDate.setDate(startDate.getDate() + 30);
+                endDateInput.value = formatDate(endDate);
+
+                const invoiceDate = new Date(startDate);
+                invoiceDate.setDate(startDate.getDate() + 15);
+                invoiceDateInput.value = formatDate(invoiceDate);
+            }
+        }
+
+        document.getElementById('startDate').addEventListener('change', updateDates);
+
+        // Set initial values
+        document.addEventListener('DOMContentLoaded', function() {
+            const startDateInput = document.getElementById('startDate');
+            const today = new Date();
+            startDateInput.value = formatDate(today);
+            updateDates();
+        });
+    </script>
 @endsection

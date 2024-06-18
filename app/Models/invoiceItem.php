@@ -15,7 +15,7 @@ class InvoiceItem extends Model
         'invoiceId',
         'itemId',
         'packageId',
-        'quantity',
+        'quantity'
     ];
 
     public $timestamps = false;
