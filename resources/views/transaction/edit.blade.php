@@ -173,6 +173,7 @@
                     <td>${packageText}</td>
                     <td>${quantity}</td>
                     <td>
+                    <button type="button" class="btn btn-warning" onclick="editRow(this)">Edit</button>
                         <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
                     </td>
                 `;
@@ -276,7 +277,7 @@
             // Remove the row from table and update hidden input field
             removeRow(button, itemId);
         }
-        
+
         // Set initial values
         document.addEventListener('DOMContentLoaded', function() {
             const startDateInput = document.getElementById('startDate');
