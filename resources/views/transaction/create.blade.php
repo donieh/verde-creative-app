@@ -57,7 +57,7 @@
                         <div id="forms-container">
                             <div class="form-group">
                                 <label>Nama Item:</label>
-                                <select class="form-control" id="itemSelect" required onchange="loadPackages(this)">
+                                <select class="form-control" id="itemSelect" onchange="loadPackages(this)">
                                     <option value="">Pilih Item</option>
                                     @foreach ($items as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -66,18 +66,15 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama Paket:</label>
-                                <select class="form-control" id="packageSelect" required>
+                                <select class="form-control" id="packageSelect">
                                     <option value="">Pilih Paket</option>
-                                  @foreach ($packages as $package)
-                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
-                                    @endforeach
-
+                                    <!-- Packages will be loaded dynamically based on selected item -->
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Kuantitas:</label>
                                 <input type="number" class="form-control" id="quantityInput"
-                                    placeholder="Masukkan Kuantitas" required />
+                                    placeholder="Masukkan Kuantitas" />
                             </div>
                         </div>
                         <button type="button" id="add-form" class="btn btn-primary">Tambah</button>
@@ -120,32 +117,31 @@
     </div>
 
     <script>
-      function loadPackages(select) {
-    var itemId = select.value;
-    var packageSelect = select.parentElement.nextElementSibling.querySelector('select[name="packageId[]"]');
-    packageSelect.innerHTML = '<option value="">Loading...</option>';
+        function loadPackages(select) {
+            var itemId = select.value;
+            var packageSelect = document.getElementById('packageSelect');
+            packageSelect.innerHTML = '<option value="">Loading...</option>';
 
-    if (itemId) {
-        fetch(`/get-packages-by-item/${itemId}`)
-            .then(response => response.json())
-            .then(data => {
-                packageSelect.innerHTML = '<option value="">Pilih Paket</option>';
-                data.forEach(package => {
-                    var option = document.createElement('option');
-                    option.value = package.id;
-                    option.textContent = package.name;
-                    packageSelect.appendChild(option); // Menambahkan option ke dalam select
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching packages:', error);
-                packageSelect.innerHTML = '<option value="">Error loading packages</option>';
-            });
-    } else {
-        packageSelect.innerHTML = '<option value="">Pilih Item terlebih dahulu</option>';
-    }
-}
-
+            if (itemId) {
+                fetch(`/get-packages-by-item/${itemId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        packageSelect.innerHTML = '<option value="">Pilih Paket</option>';
+                        data.forEach(package => {
+                            var option = document.createElement('option');
+                            option.value = package.id;
+                            option.textContent = package.name;
+                            packageSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching packages:', error);
+                        packageSelect.innerHTML = '<option value="">Error loading packages</option>';
+                    });
+            } else {
+                packageSelect.innerHTML = '<option value="">Pilih Item terlebih dahulu</option>';
+            }
+        }
 
         document.getElementById('add-form').addEventListener('click', function() {
             var itemSelect = document.getElementById('itemSelect');
@@ -160,14 +156,14 @@
                 var table = document.getElementById('invoiceItemsTable');
                 var row = table.insertRow();
                 row.innerHTML = `
-                <td>${table.rows.length}</td>
-                <td>${itemText}</td>
-                <td>${packageText}</td>
-                <td>${quantity}</td>
-                <td>
-                    <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
-                </td>
-            `;
+                    <td>${table.rows.length}</td>
+                    <td>${itemText}</td>
+                    <td>${packageText}</td>
+                    <td>${quantity}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
+                    </td>
+                `;
 
                 var items = JSON.parse(document.getElementById('invoiceItems').value);
                 items.push({
@@ -192,6 +188,14 @@
             items.splice(index, 1);
             document.getElementById('invoiceItems').value = JSON.stringify(items);
             row.remove();
+            updateTableRowNumbers();
+        }
+
+        function updateTableRowNumbers() {
+            var table = document.getElementById('invoiceItemsTable');
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].cells[0].innerText = i + 1;
+            }
         }
 
         function formatDate(date) {
@@ -229,4 +233,3 @@
         });
     </script>
 @endsection
-

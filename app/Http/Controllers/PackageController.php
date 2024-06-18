@@ -64,4 +64,10 @@ class PackageController extends Controller
 
         return redirect()->to('/package');
     }
+
+    public function getPackagesByItem($itemId)
+    {
+        $packages = Package::where('itemId', $itemId)->get();
+        return response()->json($packages);
+    }
 }

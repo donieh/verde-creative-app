@@ -112,4 +112,4 @@ Route::delete('transaction/items/{itemId}', [InvoiceItemController::class, 'dest
 Route::post('/invoice-items', [InvoiceItemController::class, 'store']);
 Route::put('/invoice-items/{id}', [InvoiceItemController::class, 'update']);
 Route::delete('/invoice-items/{id}', [InvoiceItemController::class, 'destroy']);
-Route::get('/get-packages-by-item/{itemId}', [InvoiceItemController::class, 'getPackagesByItem']);
+Route::get('/get-packages-by-item/{itemId}', [PackageController::class, 'getPackagesByItem']);
