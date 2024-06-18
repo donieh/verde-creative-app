@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Item;
 use App\Models\Package;
 use App\Models\Invoiceitem;
+use App\Models\InvoiceItem;
 
 class InvoiceController extends Controller
 {
