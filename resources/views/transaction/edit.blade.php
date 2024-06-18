@@ -173,8 +173,8 @@
                     <td>${packageText}</td>
                     <td>${quantity}</td>
                     <td>
-                    <button type="button" class="btn btn-warning" onclick="editRow(this)">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
+                    <button type="button" class="btn btn-warning" onclick="editRow(this, {{ $item->id }})">Edit</button>
+                    <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
                     </td>
                 `;
 
@@ -219,6 +219,7 @@
         }
 
         document.getElementById('startDate').addEventListener('change', updateDates);
+        
         function editRow(button, itemId) {
             var row = button.parentNode.parentNode;
             var itemCell = row.cells[1];
