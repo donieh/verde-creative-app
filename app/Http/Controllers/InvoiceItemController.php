@@ -4,32 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
+use App\Models\Item;
 use App\Models\Package;
 
 class InvoiceItemController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $invoiceId)
     {
-        $invoiceItem = InvoiceItem::create($request->all());
-        return response()->json($invoiceItem, 201);
+        foreach ($request->itemId as $key => $itemId) {
+            InvoiceItem::create([
+                'invoiceId' => $invoiceId,
+                'itemId' => $itemId,
+                'packageId' => $request->packageId[$key],
+                'quantity' => $request->quantity[$key],
+            ]);
+        }
+
+        return redirect()->to('/transaction/' . $invoiceId . '/edit');
     }
 
-    public function update(Request $request, $id)
+    public function destroy($itemId)
     {
-        $invoiceItem = InvoiceItem::findOrFail($id);
-        $invoiceItem->update($request->all());
-        return response()->json($invoiceItem, 200);
-    }
-
-    public function destroy($id)
-    {
-        InvoiceItem::destroy($id);
-        return response()->json(null, 204);
-    }
-
-    public function getPackagesByItem($itemId)
-    {
-        $packages = Package::where('itemId', $itemId)->get();
-        return response()->json($packages);
+        $invoiceItem = InvoiceItem::findOrFail($itemId);
+        $invoiceId = $invoiceItem->invoiceId;
+        $invoiceItem->delete();
+        return redirect()->to('/transaction/' . $invoiceId . '/edit');
     }
 }

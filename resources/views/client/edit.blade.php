@@ -8,23 +8,20 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-custom" style="color:black">Form Edit Pelanggan</h6>
             </div>
-            <form action="/client/{{$client->id}}" method="POST">
+            <form action="/client/{{ $client->id }}" method="POST">
                 @method('PUT')
                 {{ csrf_field() }}
 
                 <div class="card-body">
                     <input type="hidden" name="id" value="{{ $client->id }}" />
                     <div class="form-group">
-                        <label>Kode:</label>
-                        <input type="text" class="form-control" name="code" value="{{ $client->code }}" required />
-                    </div>
-                    <div class="form-group">
                         <label>Nama Perusahaan:</label>
                         <input type="text" class="form-control" name="name" value="{{ $client->name }}" required />
                     </div>
                     <div class="form-group">
                         <label>Nama Penanggung Jawab:</label>
-                        <input type="text" class="form-control" name="contactPerson" value="{{ $client->contactPerson }}" required />
+                        <input type="text" class="form-control" name="contactPerson" value="{{ $client->contactPerson }}"
+                            required />
                     </div>
                     <div class="form-group">
                         <label>No Telepon:</label>

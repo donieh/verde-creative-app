@@ -60,7 +60,6 @@ Route::post('/login', function (Request $request) {
 });
 
 Route::post('/logout', function (Request $request) {
-    // End the session and logout the user
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
@@ -90,23 +89,25 @@ Route::delete('/client/{clientId}', [ClientController::class, 'destroy']);
 Route::get('/item', [ItemController::class, 'index']);
 Route::get('/item/create', [ItemController::class, 'create']);
 Route::post('/item', [ItemController::class, 'store']);
-Route::get('/item/{clientId}/edit', [ItemController::class, 'edit']);
-Route::put('/item/{clientId}', [ItemController::class, 'update']);
-Route::delete('/item/{clientId}', [ItemController::class, 'destroy']);
+Route::get('/item/{itemId}/edit', [ItemController::class, 'edit']);
+Route::put('/item/{itemId}', [ItemController::class, 'update']);
+Route::delete('/item/{itemId}', [ItemController::class, 'destroy']);
 
 Route::get('/package', [PackageController::class, 'index']);
 Route::get('/package/create', [PackageController::class, 'create']);
 Route::post('/package', [PackageController::class, 'store']);
-Route::get('/package/{clientId}/edit', [PackageController::class, 'edit']);
-Route::put('/package/{clientId}', [PackageController::class, 'update']);
-Route::delete('/package/{clientId}', [PackageController::class, 'destroy']);
+Route::get('/package/{packageId}/edit', [PackageController::class, 'edit']);
+Route::put('/package/{packageId}', [PackageController::class, 'update']);
+Route::delete('/package/{packageId}', [PackageController::class, 'destroy']);
 
 Route::get('/transaction', [InvoiceController::class, 'index']);
 Route::get('/transaction/create', [InvoiceController::class, 'create']);
 Route::post('/transaction', [InvoiceController::class, 'store']);
-Route::get('/transaction/{clientId}/edit', [InvoiceController::class, 'edit']);
-Route::put('/transaction/{clientId}', [InvoiceController::class, 'update']);
-Route::delete('/transaction/{clientId}', [InvoiceController::class, 'destroy']);
+Route::get('/transaction/{invoiceId}/edit', [InvoiceController::class, 'edit']);
+Route::put('/transaction/{invoiceId}', [InvoiceController::class, 'update']);
+Route::delete('/transaction/{invoiceId}', [InvoiceController::class, 'destroy']);
+Route::post('transaction/{invoiceId}/items', [InvoiceItemController::class, 'store'])->name('invoice-items.store');
+Route::delete('transaction/items/{itemId}', [InvoiceItemController::class, 'destroy'])->name('invoice-items.destroy');
 
 Route::post('/invoice-items', [InvoiceItemController::class, 'store']);
 Route::put('/invoice-items/{id}', [InvoiceItemController::class, 'update']);

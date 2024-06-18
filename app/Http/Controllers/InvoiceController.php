@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Item;
 use App\Models\Package;
-use App\Models\InvoiceItem;
-
-
 
 class InvoiceController extends Controller
 {
@@ -21,14 +18,11 @@ class InvoiceController extends Controller
 
     public function create()
     {
-        // $invoiceItems = \App\Models\InvoiceItem::all();
         $clients = Client::all();
         $items = Item::all();
         $packages = Package::all();
         return view('transaction.create', compact('clients', 'items', 'packages'));
     }
-
-    // InvoiceController.php
 
     public function store(Request $request)
     {
@@ -46,48 +40,28 @@ class InvoiceController extends Controller
             'downPayment' => $request->downPayment
         ]);
 
-        // Store Invoice Items
-        foreach ($request->itemId as $key => $itemId) {
-            InvoiceItem::create([
-                'invoiceId' => $invoice->id,
-                'itemId' => $itemId,
-                'packageId' => $request->packageId[$key],
-                'quantity' => $request->quantity[$key],
-            ]);
-        }
-
         return redirect()->to('/transaction');
     }
 
-
     public function edit($invoiceId)
     {
-        $invoiceItems = InvoiceItem::all();
-        // return view('package.create', compact('items'));
-
         $invoice = Invoice::findOrFail($invoiceId);
-        return view('invoice.edit', [
-            'invoice' => $invoice,
-            'invoiceItems' => $invoiceItems,
-        ]);
+        $clients = Client::all();
+        $items = Item::all();
+        $packages = Package::all();
+        return view('transaction.edit', compact('invoice', 'clients', 'items', 'packages'));
     }
 
     public function update(Request $request, $invoiceId)
     {
-        $invoice = Invoice::where('id', $invoiceId)->update([
-            'code' => $request->code,
+        $invoice = Invoice::findOrFail($invoiceId);
+        $invoice->update([
             'invoiceDate' => $request->invoiceDate,
-            'quantity' => $request->quantity,
-            'totalPrice' => $request->totalPrice,
-            'subTotal' => $request->subTotal,
-            'discount' => $request->discount,
-            'downPayment' => $request->downPayment,
-            'grandTotal' => $request->grandTotal,
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
-            'dueDate' => $request->dueDate,
             'clientId' => $request->clientId,
-            'staffId' => $request->staffId
+            'discount' => $request->discount,
+            'downPayment' => $request->downPayment
         ]);
 
         return redirect()->to('/transaction');
@@ -96,7 +70,6 @@ class InvoiceController extends Controller
     public function destroy($invoiceId)
     {
         Invoice::where('id', $invoiceId)->delete();
-
         return redirect()->to('/transaction');
     }
 }
