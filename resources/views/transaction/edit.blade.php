@@ -217,23 +217,6 @@
             return `${year}-${month}-${day}`;
         }
 
-        function updateDates() {
-            const startDateInput = document.getElementById('startDate');
-            const endDateInput = document.getElementById('endDate');
-            const invoiceDateInput = document.getElementById('invoiceDate');
-            const startDate = new Date(startDateInput.value);
-
-            if (startDateInput.value) {
-                const endDate = new Date(startDate);
-                endDate.setDate(startDate.getDate() + 30);
-                endDateInput.value = formatDate(endDate);
-
-                const invoiceDate = new Date(startDate);
-                invoiceDate.setDate(startDate.getDate() + 15);
-                invoiceDateInput.value = formatDate(invoiceDate);
-            }
-        }
-
         document.getElementById('startDate').addEventListener('change', updateDates);
 
         // Set initial values
