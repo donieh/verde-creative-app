@@ -220,47 +220,58 @@
 
         document.getElementById('startDate').addEventListener('change', updateDates);
         
-        function editRow(button, itemId) {
-            var row = button.parentNode.parentNode;
-            var itemCell = row.cells[1];
-            var packageCell = row.cells[2];
-            var quantityCell = row.cells[3];
+        document.addEventListener('DOMContentLoaded', function() {
+    // Loop through each row in the table
+    var rows = document.querySelectorAll('#invoiceItemsTable tr');
+    rows.forEach(function(row) {
+        var editButton = row.querySelector('.btn-warning');
+        editButton.addEventListener('click', function() {
+            editRow(this, row.rowIndex - 1);
+        });
+    });
+});
 
-            var itemText = itemCell.innerText;
-            var packageText = packageCell.innerText;
-            var quantity = quantityCell.innerText;
+function editRow(button, rowIndex) {
+    var row = button.parentNode.parentNode;
+    var itemCell = row.cells[1];
+    var packageCell = row.cells[2];
+    var quantityCell = row.cells[3];
 
-            // Set selected item and package in dropdowns
-            var itemSelect = document.getElementById('itemSelect');
-            var packageSelect = document.getElementById('packageSelect');
+    var itemText = itemCell.innerText;
+    var packageText = packageCell.innerText;
+    var quantity = quantityCell.innerText;
 
-            // Loop through options to find matching item and package
-            for (var i = 0; i < itemSelect.options.length; i++) {
-                if (itemSelect.options[i].text === itemText) {
-                    itemSelect.selectedIndex = i;
-                    break;
-                }
-            }
+    // Set selected item and package in dropdowns
+    var itemSelect = document.getElementById('itemSelect');
+    var packageSelect = document.getElementById('packageSelect');
 
-            // Fetch packages based on selected item
-            loadPackages(itemSelect);
-
-            // Set selected package
-            setTimeout(function() {  // Delay to ensure packages are loaded
-                for (var j = 0; j < packageSelect.options.length; j++) {
-                    if (packageSelect.options[j].text === packageText) {
-                        packageSelect.selectedIndex = j;
-                        break;
-                    }
-                }
-            }, 500);  // Adjust delay time as needed
-
-            // Set quantity
-            document.getElementById('quantityInput').value = quantity;
-
-            // Remove the row from table and update hidden input field
-            removeRow(button, itemId);
+    // Loop through options to find matching item and package
+    for (var i = 0; i < itemSelect.options.length; i++) {
+        if (itemSelect.options[i].text === itemText) {
+            itemSelect.selectedIndex = i;
+            break;
         }
+    }
+
+    // Fetch packages based on selected item
+    loadPackages(itemSelect);
+
+    // Set selected package
+    setTimeout(function() {  // Delay to ensure packages are loaded
+        for (var j = 0; j < packageSelect.options.length; j++) {
+            if (packageSelect.options[j].text === packageText) {
+                packageSelect.selectedIndex = j;
+                break;
+            }
+        }
+    }, 500);  // Adjust delay time as needed
+
+    // Set quantity
+    document.getElementById('quantityInput').value = quantity;
+
+    // Remove the row from table and update hidden input field
+    removeRow(button);
+}
 
         // Set initial values
         document.addEventListener('DOMContentLoaded', function() {
