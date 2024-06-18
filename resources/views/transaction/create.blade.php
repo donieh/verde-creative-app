@@ -68,7 +68,10 @@
                                 <label>Nama Paket:</label>
                                 <select class="form-control" id="packageSelect" required>
                                     <option value="">Pilih Paket</option>
-                                    <!-- Packages will be loaded dynamically based on selected item -->
+                                  @foreach ($packages as $package)
+                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -226,3 +229,4 @@
         });
     </script>
 @endsection
+
