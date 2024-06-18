@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Item;
 use App\Models\Package;
+use App\Models\Invoiceitem;
 
 class InvoiceController extends Controller
 {
@@ -40,19 +41,6 @@ class InvoiceController extends Controller
             'downPayment' => $request->downPayment
         ]);
 
-<<<<<<< HEAD
-        return redirect()->to('/transaction');
-    }
-
-    public function edit($invoiceId)
-    {
-        $invoice = Invoice::findOrFail($invoiceId);
-        $clients = Client::all();
-        $items = Item::all();
-        $packages = Package::all();
-        return view('transaction.edit', compact('invoice', 'clients', 'items', 'packages'));
-    }
-=======
         $invoiceItems = json_decode($request->invoiceItems, true);
 
         foreach ($invoiceItems as $item) {
@@ -85,7 +73,6 @@ class InvoiceController extends Controller
         return view('transaction.edit', compact('invoice', 'clients', 'items'));
     }
 
->>>>>>> b12f694018a1c7d4b34a484daa33aa952226aa6a
 
     public function update(Request $request, $invoiceId)
     {
