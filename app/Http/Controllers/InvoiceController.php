@@ -85,9 +85,26 @@ class InvoiceController extends Controller
             'discount' => $request->discount,
             'downPayment' => $request->downPayment
         ]);
-
+    
+        // Update invoice items
+        $invoiceItems = json_decode($request->invoiceItems, true);
+    
+        // Delete existing invoice items first
+        InvoiceItem::where('invoiceId', $invoice->id)->delete();
+    
+        // Insert updated invoice items
+        foreach ($invoiceItems as $item) {
+            InvoiceItem::create([
+                'invoiceId' => $invoice->id,
+                'itemId' => $item['itemId'],
+                'packageId' => $item['packageId'],
+                'quantity' => $item['quantity']
+            ]);
+        }
+    
         return redirect()->to('/transaction');
     }
+    
 
     public function destroy($invoiceId)
     {
