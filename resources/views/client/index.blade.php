@@ -1,6 +1,7 @@
 @extends('layout.user-panel-layout')
 
 @section('panel_content')
+
     <div class="container-fluid">
 
         <!-- Page Heading -->
