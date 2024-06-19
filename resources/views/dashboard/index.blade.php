@@ -6,9 +6,9 @@
     $staffName = $staff->name;
 
     // Data dari controller
-    $totalUsers = $totalUsers ?? 0;
-    $totalCustomers = $totalCustomers ?? 0;
-    $totalTransactions = $totalTransactions ?? 0;
+    $totalStaff = $totalStaff ?? 0;
+    $totalClients = $totalClients ?? 0;
+    $totalInvoices = $totalInvoices ?? 0;
 @endphp
 
 <!-- Set background color for the whole page -->
@@ -52,7 +52,7 @@
                             <div class="text-s font-weight-bold mb-1" style="color:#004d00;">Total User</div>
                         </div>
                         <div class="col text-right">
-                            <div class="h3 mb-0" style="color:#004d00;">{{ $totalUsers }}</div>
+                            <div class="h3 mb-0 font-weight-bold" style="color:#004d00;">{{ $totalStaff }}</div>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <div class="text-s font-weight-bold mb-1" style="color:#004d00;">Total Pelanggan</div>
                         </div>
                         <div class="col text-right">
-                            <div class="h3 mb-0 font-weight-bold" style="color:#004d00;">{{ $totalCustomers }}</div>
+                            <div class="h3 mb-0 font-weight-bold" style="color:#004d00;">{{ $totalClients }}</div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                             <div class="text-s font-weight-bold mb-1" style="color:#004d00;">Total Transaksi</div>
                         </div>
                         <div class="col text-right">
-                            <div class="h3 mb-0 font-weight-bold" style="color:#004d00;">{{ $totalTransactions }}</div>
+                            <div class="h3 mb-0 font-weight-bold" style="color:#004d00;">{{ $totalInvoices }}</div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="text-left custom-text"> <!-- Posisi label di sebelah kiri -->
                             <h5 style="font-size: 1rem; color: #000;">Transaksi</h5>
-                            <p style="font-size: 1rem; color: #000;">{{ $totalTransactions }}</p>
+                            <p style="font-size: 1rem; color: #000;">{{ $totalInvoices }}</p>
                         </div>
                         <a href="/transactions" class="btn btn-light btn-sm shadow" style="color: #5A6ACF; border-radius: 5px;">View</a>
                     </div>
@@ -115,43 +115,25 @@
             </div>
         </div>
 
-        <!-- New Users Chart -->
-        <!-- <div class="col-md-6 mb-4"> 
-            <div class="card h-100 py-2" style="background-color:#F5F5F5; border-radius:15px; height:400px; border:#F5F5F5">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div class="text-left custom-text"> 
-                            <h5 style="font-size: 1rem; color: #000;">Pendapatan</h5>
-                            <p style="font-size: 1rem; color: #000;">{{ $totalUsers }}</p>
-                        </div>
-                        <a href="/users" class="btn btn-light btn-sm shadow" style="color: #5A6ACF; border-radius: 5px;">View</a>
-                    </div>
-                    <canvas id="newUsersChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>  -->
-
 <!-- Include Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Script to create the chart -->
 <script>
     // Get the data from the server (using blade syntax to embed PHP variables)
-    var totalTransactions = @json($totalTransactions);
+    var totalInvoices = @json($totalInvoices);
 
     // Get the canvas element
-    var ctx = document.getElementById('transactionsChart').getContext('2d');
+    var ctx = document.getElementById('InvoicesChart').getContext('2d');
 
     // Create the chart
-    var transactionsChart = new Chart(ctx, {
+    var invoicesChart = new Chart(ctx, {
         type: 'line', // Type of chart
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // X-axis labels
             datasets: [{
                 label: 'Transaksi',
-                data: totalTransactions, // Data to plot
+                data: totalInvoices, // Data to plot
                 borderColor: '#6a0dad', // Line color (purple)
                 backgroundColor: 'rgba(106, 13, 173, 0.2)', // Fill color (purple with transparency)
                 borderWidth: 2, // Line width
