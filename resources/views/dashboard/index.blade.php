@@ -3,7 +3,7 @@
 @php
     /** @var \App\Models\Staff $username */
     $staff = session()->get('logged_in_user');
-    $staffName = $staff ? $staff->name : 'Guest';
+    $staffName = $staff->name;
 
     // Data dari controller
     $totalUsers = $totalUsers ?? 0;
@@ -116,11 +116,11 @@
         </div>
 
         <!-- New Users Chart -->
-        <div class="col-md-6 mb-4"> <!-- Tambahkan kolom grafik baru di sebelah kanan -->
-            <div class="card h-100 py-2" style="background-color:#F5F5F5; border-radius:15px; height:400px; border:#F5F5F5"> <!-- Atur tinggi -->
+        <!-- <div class="col-md-6 mb-4"> 
+            <div class="card h-100 py-2" style="background-color:#F5F5F5; border-radius:15px; height:400px; border:#F5F5F5">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start">
-                        <div class="text-left custom-text"> <!-- Posisi label di sebelah kiri -->
+                        <div class="text-left custom-text"> 
                             <h5 style="font-size: 1rem; color: #000;">Pendapatan</h5>
                             <p style="font-size: 1rem; color: #000;">{{ $totalUsers }}</p>
                         </div>
@@ -131,7 +131,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>  -->
 
 <!-- Include Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

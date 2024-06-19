@@ -1,6 +1,6 @@
 @php
-    $staff = session()->get('logged_in_user');
-    $staffName = $staff ? $staff->name : 'Guest';
+session()->put('logged_in_user');
+$staffName = $staff->name;
 @endphp
 
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
