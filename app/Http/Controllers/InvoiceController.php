@@ -48,7 +48,8 @@ class InvoiceController extends Controller
                 'invoiceId' => $invoice->id,
                 'itemId' => $item['itemId'],
                 'packageId' => $item['packageId'],
-                'quantity' => $item['quantity']
+                'quantity' => $item['quantity'],
+                'price' => $item['price']
             ]);
         }
 
@@ -98,7 +99,8 @@ class InvoiceController extends Controller
                 'invoiceId' => $invoice->id,
                 'itemId' => $item['itemId'],
                 'packageId' => $item['packageId'],
-                'quantity' => $item['quantity']
+                'quantity' => $item['quantity'],
+                'price' => $item['price']
             ]);
         }
     

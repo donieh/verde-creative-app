@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('invoiceId');
             $table->unsignedBigInteger('packageId');
             $table->integer('quantity');
-            // $table->decimal('price', 11, 2);
+            $table->decimal('price', 11, 2);
             
             // Define foreign keys
             $table->foreign('itemId')->references('id')->on('items')->onDelete('cascade');

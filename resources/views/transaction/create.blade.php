@@ -76,6 +76,10 @@
                                 <input type="number" class="form-control" id="quantityInput"
                                     placeholder="Masukkan Kuantitas" />
                             </div>
+                            <div class="form-group">
+                                <label>Harga:</label>
+                                <input type="decimal" class="form-control" id="priceInput" placeholder="Masukkan Harga" />
+                            </div>
                         </div>
                         <button type="button" id="add-form" class="btn btn-primary">Tambah</button>
                     </div>
@@ -94,6 +98,7 @@
                                         <th width="10">Nama Item</th>
                                         <th width="100">Nama Paket</th>
                                         <th width="100">Kuantitas</th>
+                                        <th width="100">Harga</th>
                                         <th width="100">Action</th>
                                     </tr>
                                 </thead>
@@ -144,15 +149,17 @@
             }
         }
 
-        document.getElementById('add-form').addEventListener('click', function() {
+                document.getElementById('add-form').addEventListener('click', function() {
             var itemSelect = document.getElementById('itemSelect');
             var packageSelect = document.getElementById('packageSelect');
             var quantityInput = document.getElementById('quantityInput');
+            var priceInput = document.getElementById('priceInput');
 
-            if (itemSelect.value && packageSelect.value && quantityInput.value) {
+            if (itemSelect.value && packageSelect.value && quantityInput.value && priceInput.value) {
                 var itemText = itemSelect.options[itemSelect.selectedIndex].text;
                 var packageText = packageSelect.options[packageSelect.selectedIndex].text;
                 var quantity = quantityInput.value;
+                var price = priceInput.value;
 
                 var table = document.getElementById('invoiceItemsTable');
                 var row = table.insertRow();
@@ -161,6 +168,7 @@
                     <td>${itemText}</td>
                     <td>${packageText}</td>
                     <td>${quantity}</td>
+                    <td>${price}</td>
                     <td>
                         <button type="button" class="btn btn-warning" onclick="editRow(this)">Edit</button>
                         <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
@@ -171,13 +179,15 @@
                 items.push({
                     itemId: itemSelect.value,
                     packageId: packageSelect.value,
-                    quantity: quantity
+                    quantity: quantity,
+                    price: price
                 });
                 document.getElementById('invoiceItems').value = JSON.stringify(items);
 
                 itemSelect.value = '';
                 packageSelect.innerHTML = '<option value="">Pilih Paket</option>';
                 quantityInput.value = '';
+                priceInput.value = '';
             } else {
                 alert('Isi semua field');
             }
@@ -192,6 +202,7 @@
             row.remove();
             updateTableRowNumbers();
         }
+
 
         function updateTableRowNumbers() {
             var table = document.getElementById('invoiceItemsTable');

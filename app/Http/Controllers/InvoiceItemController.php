@@ -20,7 +20,8 @@ class InvoiceItemController extends Controller
                 'invoiceId' => $request->invoiceId,
                 'itemId' => $item['itemId'],
                 'packageId' => $item['packageId'],
-                'quantity' => $item['quantity']
+                'quantity' => $item['quantity'],
+                'price' => $item['price'], // Menyimpan harga
             ]);
         }
 
@@ -50,7 +51,8 @@ class InvoiceItemController extends Controller
                 'invoiceId' => $invoiceId,
                 'itemId' => $item['itemId'],
                 'packageId' => $item['packageId'],
-                'quantity' => $item['quantity']
+                'quantity' => $item['quantity'],
+                'price' => $item['price'], // Menyimpan harga
             ]);
         }
 
