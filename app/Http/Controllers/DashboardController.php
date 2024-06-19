@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Staff;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function dashboard()
-{
-    $totalUsers = Staff::count();
-    $totalCustomers = Client::count();
-    $totalTransactions = Transaction::count();
+    {
+        // Mengambil data jumlah dari database
+        $totalUsers = Staff::count();
+        $totalCustomers = Client::count();
+        $totalTransactions = Transaction::count();
 
-    return view('dashboard', compact('totalUsers', 'totalCustomers', 'totalTransactions'));
-}
+        // Contoh data pengguna baru per bulan
+        $monthlyNewUsers = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]; // Data dummy
 
+        // Contoh data transaksi per bulan
+        $monthlyTransactions = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]; // Data dummy
+
+        return view('dashboard.index', compact('totalUsers', 'totalCustomers', 'totalTransactions', 'monthlyNewUsers', 'monthlyTransactions'));
+    }
 }

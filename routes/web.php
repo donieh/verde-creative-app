@@ -70,6 +70,8 @@ Route::get('/dashboard', function() {
     return view('dashboard.index');
 });
 
+// Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/create', [UserController::class, 'create']);
 Route::post('/user', [UserController::class, 'store']);

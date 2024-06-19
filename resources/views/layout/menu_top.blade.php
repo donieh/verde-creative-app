@@ -1,7 +1,8 @@
 @php
-$staff = session()->get('logged_in_user');
-    $staffName = $staff->name;
+    $staff = session()->get('logged_in_user');
+    $staffName = $staff ? $staff->name : 'Guest';
 @endphp
+
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
