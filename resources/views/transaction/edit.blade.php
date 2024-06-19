@@ -104,6 +104,7 @@
                                         <td>{{ $item->quantity }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>
+                                            <button type="button" class="btn btn-warning" onclick="editRow(this)">Edit</button>
                                             <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
                                         </td>
                                     </tr>
