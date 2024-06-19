@@ -6,9 +6,7 @@
     $staffName = $staff->name;
 
     // Data dari controller
-    $totalStaff = $totalStaff ?? 0;
-    $totalClients = $totalClients ?? 0;
-    $totalInvoices = $totalInvoices ?? 0;
+    
 @endphp
 
 <!-- Set background color for the whole page -->
