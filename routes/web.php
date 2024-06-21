@@ -5,6 +5,7 @@
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\InvoiceController;
@@ -66,9 +67,7 @@ Route::post('/logout', function (Request $request) {
     return redirect('/login');
 })->name('logout');
 
-Route::get('/dashboard', function() {
-    return view('dashboard.index');
-});
+Route::get('/dashboard', [DashboardController::class, "dashboard"]);
 
 // Route::get('/dashboard', [DashboardController::class, 'dashboard']);
 

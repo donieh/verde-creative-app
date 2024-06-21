@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $totalInvoices = Invoice::count();
 
         // Debugging
-        dd($totalStaff, $totalClients, $totalInvoices);
+        // dd($totalStaff, $totalClients, $totalInvoices);
 
         // Contoh data pengguna baru per bulan
         $monthlyNewStaff = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]; // Data dummy
