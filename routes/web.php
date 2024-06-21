@@ -67,7 +67,7 @@ Route::post('/logout', function (Request $request) {
     return redirect('/login');
 })->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, "dashboard"]);
+Route::get('/dashboard', [DashboardController::class, 'dashboard']);
 
 // Route::get('/dashboard', [DashboardController::class, 'dashboard']);
 
