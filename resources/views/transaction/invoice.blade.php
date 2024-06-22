@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="invoice-box">
-    <table>
+        <table>
             <tr>
                 <td colspan="4" align="right"><strong>INVOICE (id)</strong></td>
             </tr>
@@ -54,8 +54,8 @@
                     <td align="center">{{ $item->item->name }}</td>
                     <td align="center">{{ $item->package ? $item->package->name : '-' }}</td>
                     <td align="center">{{ $item->quantity }}</td>
-                    <td align="center">{{ number_format($item->price, 2) }}</td>
-                    <td align="center">{{ number_format($item->quantity * $item->price, 2) }}</td>
+                    <td align="center">Rp {{ number_format($item->price, 2) }}</td>
+                    <td align="center">Rp {{ number_format($item->quantity * $item->price, 2) }}</td>
                 </tr>
             @endforeach
 
@@ -64,19 +64,19 @@
             <br>
             <tr>
                 <td colspan="4" align="right">Subtotal</td>
-                <td>{{ number_format($items->sum(function ($item) { return $item->quantity * $item->price; }), 2) }}</td>
+                <td>Rp {{ number_format($items->sum(function ($item) { return $item->quantity * $item->price; }), 2) }}</td>
             </tr>
             <tr>
                 <td colspan="4" align="right">Discount</td>
-                <td>{{ number_format($discount, 2) }}</td>
+                <td>Rp {{ number_format($discount, 2) }}</td>
             </tr>
             <tr>
                 <td colspan="4" align="right">Down Payment</td>
-                <td>{{ number_format($downPayment, 2) }}</td>
+                <td>Rp {{ number_format($downPayment, 2) }}</td>
             </tr>
             <tr>
                 <td colspan="4" align="right"><strong>TOTAL</strong></td>
-                <td><strong>{{ number_format($total, 2) }}</strong></td>
+                <td><strong>Rp {{ number_format($total, 2) }}</strong></td>
             </tr>
         </table>
     </div>

@@ -116,7 +116,7 @@
             </div>
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-dark">
+                <button type="submit" class="btn" style="color: white; background: navy;">
                     <i class="fas fa-save"></i> Simpan
                 </button>
                 <a href="/transaction" class="btn btn-warning">
