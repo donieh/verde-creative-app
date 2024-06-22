@@ -13,58 +13,69 @@
 </head>
 <body>
     <div class="invoice-box">
-        <table>
+    <table>
             <tr>
-                <th colspan="2">Invoice #: {{ $invoice->invoiceId }}</th>
-                <th>Tanggal Invoice: {{ $invoiceDate }}</th>
-                <th>Tanggal Jatuh Tempo: {{ $dueDate }}</th>
+                <td colspan="4" align="right"><strong>INVOICE (id)</strong></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right">Date</td>  
             </tr>
             <tr>
                 <td colspan="2">
-                    <strong>Dari:</strong><br>
-                    Perusahaan Anda<br>
-                    Alamat Anda<br>
-                    Kota, Negara, Zip Code
-                </td>
-                <td colspan="2">
-                    <strong>Kepada:</strong><br>
-                    {{ $client->name }}<br>
-                    {{ $client->address }}<br>
-                    {{ $client->city }}, {{ $client->country }}, {{ $client->postalCode }}
+                    <strong>INVOICE</strong>
                 </td>
             </tr>
+            <br>
             <tr>
-                <th>#</th>
-                <th>Nama Item</th>
-                <th>Nama Paket</th>
-                <th>Kuantitas</th>
-                <th>Harga</th>
-                <th>Total</th>
+                <td colspan="2">
+                    <strong>{{ $client->name }}</strong><br>
+                    Client phone<br>
+                    Client address
+                </td>
+                <td colspan="2">
+                    {{ $client->phone }}<br>
+                    {{ $client->address }}
+                </td>
+            </tr>
+
+            <br>
+            <br>
+            <br>
+
+            <tr>
+                <td align="center"><strong>ITEM</strong></td>
+                <td align="center"><strong>PACKAGE</strong></td>
+                <td align="center"><strong>QTY</strong></td>
+                <td align="center"><strong>UNIT PRICE</strong></td>
+                <td align="center"><strong>TOTAL</strong></td>
             </tr>
             @foreach ($items as $index => $item)
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $item->item->name }}</td>
-                    <td>{{ $item->package ? $item->package->name : '-' }}</td>
-                    <td>{{ $item->quantity }}</td>
-                    <td>{{ number_format($item->price, 2) }}</td>
-                    <td>{{ number_format($item->quantity * $item->price, 2) }}</td>
+                    <td align="center">{{ $item->item->name }}</td>
+                    <td align="center">{{ $item->package ? $item->package->name : '-' }}</td>
+                    <td align="center">{{ $item->quantity }}</td>
+                    <td align="center">{{ number_format($item->price, 2) }}</td>
+                    <td align="center">{{ number_format($item->quantity * $item->price, 2) }}</td>
                 </tr>
             @endforeach
+
+            <br>
+            <br>
+            <br>
             <tr>
-                <td colspan="5" align="right">Subtotal:</td>
+                <td colspan="4" align="right">Subtotal</td>
                 <td>{{ number_format($items->sum(function ($item) { return $item->quantity * $item->price; }), 2) }}</td>
             </tr>
             <tr>
-                <td colspan="5" align="right">Discount:</td>
+                <td colspan="4" align="right">Discount</td>
                 <td>{{ number_format($discount, 2) }}</td>
             </tr>
             <tr>
-                <td colspan="5" align="right">Down Payment:</td>
+                <td colspan="4" align="right">Down Payment</td>
                 <td>{{ number_format($downPayment, 2) }}</td>
             </tr>
             <tr>
-                <td colspan="5" align="right"><strong>Total:</strong></td>
+                <td colspan="4" align="right"><strong>TOTAL</strong></td>
                 <td><strong>{{ number_format($total, 2) }}</strong></td>
             </tr>
         </table>
