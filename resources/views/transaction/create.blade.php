@@ -35,9 +35,9 @@
                         </div>
                         <div style="flex: 1; margin-right: 10px;">
                             <div class="form-group">
-                                <label>Tanggal Invoice:</label>
-                                <input type="date" class="form-control" name="invoiceDate" id="invoiceDate"
-                                    placeholder="Tanggal Invoice" required />
+                                <label>Tanggal Jatuh Tempo:</label>
+                                <input type="date" class="form-control" name="dueDate" id="dueDate"
+                                    placeholder="Tanggal Jatuh Tempo" required />
                             </div>
                             <div class="form-group">
                                 <label>Discount:</label>
@@ -221,7 +221,7 @@
         function updateDates() {
             const startDateInput = document.getElementById('startDate');
             const endDateInput = document.getElementById('endDate');
-            const invoiceDateInput = document.getElementById('invoiceDate');
+            const dueDateInput = document.getElementById('dueDate');
             const startDate = new Date(startDateInput.value);
 
             if (startDateInput.value) {
@@ -229,9 +229,9 @@
                 endDate.setDate(startDate.getDate() + 30);
                 endDateInput.value = formatDate(endDate);
 
-                const invoiceDate = new Date(startDate);
-                invoiceDate.setDate(startDate.getDate() + 15);
-                invoiceDateInput.value = formatDate(invoiceDate);
+                const dueDate = new Date(startDate);
+                dueDate.setDate(startDate.getDate() + 15);
+                dueDateInput.value = formatDate(dueDate);
             }
         }
 

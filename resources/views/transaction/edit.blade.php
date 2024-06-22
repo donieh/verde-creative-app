@@ -33,8 +33,8 @@
                     </div>
                     <div style="flex: 1;">
                         <div class="form-group">
-                            <label>Tanggal Invoice:</label>
-                            <input type="date" class="form-control" name="invoiceDate" value="{{ $invoice->invoiceDate }}" required />
+                            <label>Tanggal Jatuh Tempo:</label>
+                            <input type="date" class="form-control" name="dueDate" value="{{ $invoice->dueDate }}" required />
                         </div>
                         <div class="form-group">
                             <label>Discount:</label>

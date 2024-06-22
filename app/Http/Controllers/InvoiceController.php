@@ -28,7 +28,7 @@ class InvoiceController extends Controller
 
     public function store(Request $request)
     {
-        $invoiceDate = $request->invoiceDate;
+        $invoiceDate = $request->startDate;
         $dueDate = date('Y-m-d', strtotime($invoiceDate . ' +15 days'));
 
         $invoice = Invoice::create([
@@ -79,9 +79,14 @@ class InvoiceController extends Controller
     public function update(Request $request, $invoiceId)
     {
         $invoice = Invoice::findOrFail($invoiceId);
+    
+        // Set invoiceDate to startDate
+        $invoiceDate = $request->startDate;
+    
         $invoice->update([
-            'invoiceDate' => $request->invoiceDate,
+            'invoiceDate' => $invoiceDate,
             'startDate' => $request->startDate,
+            'dueDate' => $request->dueDate,
             'endDate' => $request->endDate,
             'clientId' => $request->clientId,
             'discount' => $request->discount,
@@ -107,6 +112,7 @@ class InvoiceController extends Controller
     
         return redirect()->to('/transaction');
     }
+    
     
 
     public function destroy($invoiceId)

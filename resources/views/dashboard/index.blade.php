@@ -9,6 +9,7 @@
     $totalStaff = $totalStaff ?? 0;
     $totalClients = $totalClients ?? 0;
     $totalInvoices = $totalInvoices ?? 0;
+    $monthlyInvoices = $monthlyInvoices ?? []; // Ensure monthlyInvoices is available
 @endphp
 
 <style>
@@ -117,7 +118,7 @@
 
     <!-- Script to create the chart -->
     <script>
-        var totalInvoices = @json($totalInvoices);
+        var monthlyInvoices = @json($monthlyInvoices); // Use the passed data here
 
         var ctx = document.getElementById('transactionsChart').getContext('2d');
 
@@ -127,7 +128,7 @@
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Transaksi',
-                    data: totalInvoices,
+                    data: monthlyInvoices, // Use monthlyInvoices for the data
                     borderColor: '#6a0dad',
                     backgroundColor: 'rgba(106, 13, 173, 0.2)',
                     borderWidth: 2,
