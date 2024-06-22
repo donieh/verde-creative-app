@@ -3,13 +3,11 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-primaryx" style="color:black" ;>Manajemen Data Transaksi</h1>
+        <h1 class="h3 mb-2 text-primaryx" style="color:black">Manajemen Data Transaksi</h1>
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold" style="color:black" ;>
-                    Daftar Transaksi
-                </h6>
+                <h6 class="m-0 font-weight-bold" style="color:black">Daftar Transaksi</h6>
             </div>
 
             <div class="card-body">
@@ -21,7 +19,6 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
                         <thead>
                             <tr>
                                 <th width="10">No</th>
@@ -36,35 +33,31 @@
                                 <th width="100">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach (\App\Models\Invoice::get() as $invoice)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $invoice->clients->name }}</td>
-                                   <td>INVOICE #{{ str_pad($loop->index + 1, 3, '0', STR_PAD_LEFT) }}</td>
-
+                                    <td>INVOICE #{{ str_pad($loop->index + 1, 3, '0', STR_PAD_LEFT) }}</td>
                                     <td>{{ $invoice->startDate }}</td>
                                     <td>{{ $invoice->endDate }}</td>
                                     <td>{{ $invoice->invoiceDate }}</td>
                                     <td>{{ $invoice->dueDate }}</td>
                                     <td>{{ 'Rp ' . number_format($invoice->discount, 0, ',', '.') }}</td>
                                     <td>{{ 'Rp ' . number_format($invoice->downPayment, 0, ',', '.') }}</td>
-
                                     <td>
-                                    <a href="/transaction/{{ $invoice->id }}/generate-invoice" class="btn btn-success">
-                                        <i class="fas fa-download"></i> 
-                                    </a>             
-                                        <a href="/transaction/{{ $invoice->id }}/edit" class="btn"
-                                            style="color: white; background: #466d1d">
+                                        <button data-invoice-id="{{ $invoice->id }}" class="btn preview-invoice" style="color: white; background: #1034a6">
+                                            <i class="fas fa-download"></i>
+                                        </button>             
+                                        <a href="/transaction/{{ $invoice->id }}/edit" class="btn" style="color: white; background: #466d1d">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="/transaction/{{ $invoice->id }}" method="POST"
-                                            onsubmit="return confirm('Do you want to delete this?');">
+                                        <form action="/transaction/{{ $invoice->id }}" method="POST" onsubmit="return confirm('Do you want to delete this?');">
                                             @method('delete')
                                             {{ csrf_field() }}
-                                            <button type="submit" style="color: white; background: #c01605;"
-                                                class="btn"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="submit" style="color: white; background: #c01605;" class="btn">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -75,4 +68,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.preview-invoice');
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const invoiceId = this.getAttribute('data-invoice-id');
+                    const url = `/transaction/${invoiceId}/generate-invoice`;
+                    window.open(url, '_blank');
+                });
+            });
+        });
+    </script>
 @endsection
