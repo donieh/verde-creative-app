@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Item;
 use App\Models\Package;
 use App\Models\Invoiceitem;
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -113,4 +114,27 @@ class InvoiceController extends Controller
         Invoice::where('id', $invoiceId)->delete();
         return redirect()->to('/transaction');
     }
+
+
+    public function generateInvoice($invoiceId)
+    {
+        $invoice = Invoice::with('clients', 'items.item', 'items.package')->findOrFail($invoiceId);
+        
+        $data = [
+            'invoice' => $invoice,
+            'client' => $invoice->clients,
+            'items' => $invoice->items,
+            'invoiceDate' => $invoice->invoiceDate,
+            'dueDate' => $invoice->dueDate,
+            'discount' => $invoice->discount,
+            'downPayment' => $invoice->downPayment,
+            'total' => $invoice->items->sum(function ($item) {
+                return $item->quantity * $item->price;
+            }) - $invoice->discount - $invoice->downPayment,
+        ];
+    
+        $pdf = PDF::loadView('transaction.invoice', $data);
+        return $pdf->download('invoice-' . $invoice->invoiceId . '.pdf');
+    }
+    
 }

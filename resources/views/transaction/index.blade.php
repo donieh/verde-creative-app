@@ -52,6 +52,9 @@
                                     <td>{{ 'Rp ' . number_format($invoice->downPayment, 0, ',', '.') }}</td>
 
                                     <td>
+                                    <a href="/transaction/{{ $invoice->id }}/generate-invoice" class="btn btn-success">
+                                        <i class="fas fa-download"></i> 
+                                    </a>             
                                         <a href="/transaction/{{ $invoice->id }}/edit" class="btn"
                                             style="color: white; background: #466d1d">
                                             <i class="fas fa-edit"></i>

@@ -109,6 +109,8 @@ Route::put('/transaction/{invoiceId}', [InvoiceController::class, 'update']);
 Route::delete('/transaction/{invoiceId}', [InvoiceController::class, 'destroy']);
 Route::post('transaction/{invoiceId}/items', [InvoiceItemController::class, 'store'])->name('invoice-items.store');
 Route::delete('transaction/items/{itemId}', [InvoiceItemController::class, 'destroy'])->name('invoice-items.destroy');
+Route::get('/transaction/{invoiceId}/generate-invoice', [InvoiceController::class, 'generateInvoice']);
+
 
 Route::post('/invoice-items', [InvoiceItemController::class, 'store']);
 Route::put('/invoice-items/{id}', [InvoiceItemController::class, 'update']);
