@@ -15,10 +15,10 @@
     <div class="invoice-box">
     <table>
             <tr>
-                <td colspan="4" align="right"><strong>INVOICE (id)</strong></td>
+                <td colspan="4" align="right"><strong>INVOICE #{{ $invoice->id }}</strong></td>
             </tr>
             <tr>
-                <td colspan="4" align="right">Date</td>  
+                <td colspan="4" align="right">{{ \Carbon\Carbon::parse($invoice->invoiceDate)->format('d-m-Y') }}</td>  
             </tr>
             <tr>
                 <td colspan="2">

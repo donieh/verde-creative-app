@@ -58,15 +58,6 @@ class InvoiceController extends Controller
     }
 
 
-    // public function edit($invoiceId)
-    // {
-    //     $invoice = Invoice::findOrFail($invoiceId);
-    //     $clients = Client::all();
-    //     $items = Item::all();
-    //     $packages = Package::all();
-    //     return view('transaction.edit', compact('invoice', 'clients', 'items', 'packages'));
-    // }
-
     public function edit($invoiceId)
     {
         $invoice = Invoice::with('items.item', 'items.package')->findOrFail($invoiceId);
