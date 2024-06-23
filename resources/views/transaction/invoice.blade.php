@@ -82,7 +82,7 @@
         .contact-info {
             text-align: left;
             font-size: 14px;
-            margin-top: 100px;
+            margin-top: 150px;
         }
 
         .contact-info p {
@@ -113,13 +113,14 @@
         .invoice-box table tr.price-row td {
             padding-top: 100px;
         }
+        
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="form-logo">
-            <img src="{{ asset('assets/images/verde_wide_green.png') }}" alt="logo">
+            <img src="https://res.cloudinary.com/debtht7tz/image/upload/c_scale,h_120,w_360/verde/ogiaqqswmktiunzut4o3.jpg" alt="logo">
         </div>
 
         <div class="form-details">
