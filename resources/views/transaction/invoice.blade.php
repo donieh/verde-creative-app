@@ -27,17 +27,26 @@
 
         .form-logo {
             display: inline-block;
+            /* margin-top: 30px; */
         }
 
         .form-details {
             flex: 1;
+            display: inline-block; 
+            margin-top: 0;
+            padding-top: 0;
+
         }
 
+        .invoice-details {
 
-
+            margin-top: 0;
+}
         .invoice-details .date-details {
 
             justify-content: space-between;
+            display: inline-block;
+            /* width: 140px; text-align: left; */
         }
 
         .invoice-box table {
@@ -83,6 +92,7 @@
             text-align: left;
             font-size: 14px;
             margin-top: 150px;
+            margin-left: 30px;
         }
 
         .contact-info p {
@@ -113,6 +123,10 @@
         .invoice-box table tr.price-row td {
             padding-top: 100px;
         }
+
+        .form-logo {
+            margin-top: 100px;
+        }
         
     </style>
 </head>
@@ -142,12 +156,8 @@
         </div>
     </div>
     <div class="invoice-box">
-        {{-- <div class="container">
-            <h1 class="invoice-title">INVOICE</h1>
-        </div> --}}
-
         <div class="container">
-            <h1>{{ $client->name }}</h1>
+            <h1 style="margin-left: 15px;">{{ $client->name }}</h1>
 
             <table class="client-details-table">
                 <tbody>
@@ -162,6 +172,9 @@
                 </tbody>
             </table>
         </div>
+
+        <br>
+        <br>
         <div class="item-details">
             <table>
                 <thead>
