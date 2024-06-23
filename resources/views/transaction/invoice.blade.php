@@ -91,7 +91,7 @@
         .contact-info {
             text-align: left;
             font-size: 14px;
-            margin-top: 150px;
+            margin-top: 100px;
             margin-left: 30px;
         }
 

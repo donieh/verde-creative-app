@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    
+
     public function index()
     {
         return view('user.index');
@@ -39,23 +39,23 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $staffId)
-{
-    $staff = Staff::findOrFail($staffId);
+    {
+        $staff = Staff::findOrFail($staffId);
 
-    // Update data lainnya
-    $staff->name = $request->input('name');
-    $staff->position = $request->input('position');
-    $staff->username = $request->input('username');
+        // Update data lainnya
+        $staff->name = $request->input('name');
+        $staff->position = $request->input('position');
+        $staff->username = $request->input('username');
 
-    // Periksa apakah password baru diisi atau tidak kosong
-    if ($request->filled('password')) {
-        $staff->password = md5($request->input('password'));
+        // Periksa apakah password baru diisi atau tidak kosong
+        if ($request->filled('password')) {
+            $staff->password = md5($request->input('password'));
+        }
+
+        $staff->save();
+
+        return redirect()->to('/user');
     }
-
-    $staff->save();
-
-    return redirect()->to('/user');
-}
 
     public function destroy($staffId)
     {
