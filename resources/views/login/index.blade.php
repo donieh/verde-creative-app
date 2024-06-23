@@ -17,7 +17,8 @@
   <!-- <form action="../../auth/login/store_login.php" method="post"> -->
     <div class="container">
       <div class="form-logo">
-        <a href="../index.php" class="login-title"><img src="../assets/images/verde_wide_green.png" alt="" ></a>
+        <a href="../index.php" class="login-title">
+          <img src="../assets/images/verde_wide_green.png" alt="" ></a>
           
       </div>
       <div class="box form-box">

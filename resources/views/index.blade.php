@@ -425,7 +425,7 @@
                   <input type="email" class="form-control" name="email" id="email" placeholder="johndoe@mail.com">
                 </div>
                 <div class="form-group">
-                  <label for="phoneNumber">No Handphone</label>
+                  <label for="Number">No Handphone</label>
                   <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="+628345678900">
                 </div>
               </div>
