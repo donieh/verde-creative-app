@@ -117,27 +117,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Script to create the chart -->
-    <script>
-        var monthlyInvoices = @json($monthlyInvoices); // Use the passed data here
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var monthlyInvoices = @json(array_values($monthlyInvoices)); // Use the passed data here
 
-        var ctx = document.getElementById('transactionsChart').getContext('2d');
+            var ctx = document.getElementById('transactionsChart').getContext('2d');
 
-        var invoicesChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Transaksi',
-                    data: monthlyInvoices, // Use monthlyInvoices for the data
-                    borderColor: '#6a0dad',
-                    backgroundColor: 'rgba(106, 13, 173, 0.2)',
-                    borderWidth: 2,
-                    pointRadius: 0,
-                    pointHitRadius: 10,
-                    pointHoverRadius: 0
-                }]
-            },
-            options: {
+            var invoicesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Transaksi',
+                        data: monthlyInvoices, // Use monthlyInvoices for the data
+                        borderColor: '#6a0dad',
+                        backgroundColor: 'rgba(106, 13, 173, 0.2)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        pointHitRadius: 10,
+                        pointHoverRadius: 0
+                    }]
+                },
+               options: {
                 plugins: {
                     legend: {
                         display: false
@@ -165,6 +166,7 @@
                     }
                 }
             }
+            });
         });
     </script>
 @endsection
