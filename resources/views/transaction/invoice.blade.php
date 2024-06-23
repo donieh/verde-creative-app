@@ -32,16 +32,16 @@
 
         .form-details {
             flex: 1;
-            display: inline-block; 
+            display: inline-block;
             margin-top: 0;
             padding-top: 0;
 
         }
 
         .invoice-details {
-
             margin-top: 0;
-}
+        }
+
         .invoice-details .date-details {
 
             justify-content: space-between;
@@ -127,19 +127,19 @@
         .form-logo {
             margin-top: 100px;
         }
-        
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="form-logo">
-            <img src="https://res.cloudinary.com/debtht7tz/image/upload/c_scale,h_120,w_360/verde/ogiaqqswmktiunzut4o3.jpg" alt="logo">
+            <img src="https://res.cloudinary.com/debtht7tz/image/upload/c_scale,h_120,w_360/verde/ogiaqqswmktiunzut4o3.jpg"
+                alt="logo">
         </div>
 
         <div class="form-details">
             <div class="invoice-details">
-                <h2>INVOICE #{{ str_pad($invoice->id - 5, 3, '0', STR_PAD_LEFT) }}</h2>
+                <h2>INVOICE #{{ str_pad($invoice->id - 12, 3, '0', STR_PAD_LEFT) }}</h2>
             </div>
             <div class="invoice-details">
                 <div class="date-details">
@@ -162,11 +162,15 @@
             <table class="client-details-table">
                 <tbody>
                     <tr>
-                        <td><strong>Client phone</strong></td>
+                        <td><strong>Client PIC</strong></td>
+                        <td>{{ $client->contactPerson }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Client Phone</strong></td>
                         <td>{{ $client->phone }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Client address</strong></td>
+                        <td><strong>Client Address</strong></td>
                         <td>{{ $client->address }}</td>
                     </tr>
                 </tbody>
